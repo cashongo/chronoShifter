@@ -1,0 +1,29 @@
+{
+    "name": "cog/chrono-shifter",
+    "description": "PHP iterators for moving around in time",
+    "keywords": ["time"],
+    "authors": [
+        {
+            "name": "Kristjan Siimson",
+            "email": "kristjan.siimson@cashongo.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">= 5.5"
+    },
+    "require-dev": {
+        "instaclick/php-code-sniffer": "1.4.*",
+        "pdepend/pdepend": "2.0.*",
+        "phploc/phploc": "2.1.*",
+        "phpmd/phpmd": "2.2.*",
+        "phpunit/phpunit": "4.5.*",
+        "sebastian/phpcpd": "2.0.*",
+        "theseer/phpdox": "0.7.*"
+    },
+    "autoload": {
+      "psr-4": {
+          "COG\\ChronoShifter\\": "src/"
+      }
+    }
+}
