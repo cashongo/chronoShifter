@@ -38,25 +38,16 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
      */
     public function shiftProvider() {
         return array(
-            /*
-             * (WED) From July 1, 2015 to June 24, 2015
-             */
             array(
                 3,                     // Specific day
                 '2015-07-01 00:00:00', // Starting time
                 '2015-06-24 00:00:00'  // Expected time
             ),
-            /*
-             * (WED) From July 1, 2015 to June 24, 2015
-             */
             array(
                 3,                     // Specific day
                 '2015-07-01 15:12:24', // Starting time
                 '2015-06-24 00:00:00'  // Expected time
             ),
-            /*
-             * (THU) From June 25, 2015 to May 28, 2015
-             */
             array(
                 4,                     // Specific day
                 '2015-06-25 15:12:24', // Starting time

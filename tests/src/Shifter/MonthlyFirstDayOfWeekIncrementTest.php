@@ -38,33 +38,21 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
      */
     public function shiftProvider() {
         return array(
-            /*
-             * (MON) From June 2, 2015 to July 6, 2015
-             */
             array(
                 1,                     // Specific day
                 '2015-06-02 00:00:00', // Starting time
                 '2015-07-06 00:00:00'  // Expected time
             ),
-            /*
-             * (MON) From June 2, 2015 to July 6, 2015
-             */
             array(
                 1,                     // Specific day
                 '2015-06-02 15:12:24', // Starting time
                 '2015-07-06 00:00:00'  // Expected time
             ),
-            /*
-             * (SUN) From June 2, 2015 to July 6, 2015
-             */
             array(
                 7,                     // Specific day
                 '2015-06-02 15:12:24', // Starting time
                 '2015-06-07 00:00:00'  // Expected time
             ),
-            /*
-             * (FRI) From June 15, 2015 to July 3, 2015
-             */
             array(
                 5,                     // Specific day
                 '2015-06-15 00:00:00', // Starting time
