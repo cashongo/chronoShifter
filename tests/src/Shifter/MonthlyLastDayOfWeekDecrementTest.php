@@ -12,6 +12,27 @@ use COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekDecrement;
 class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var array
+     */
+    private $fixture = array(
+        array(
+            3,                     // Specific day
+            '2015-07-01 00:00:00', // Starting time
+            '2015-06-24 00:00:00'  // Expected time
+        ),
+        array(
+            3,                     // Specific day
+            '2015-07-01 15:12:24', // Starting time
+            '2015-06-24 00:00:00'  // Expected time
+        ),
+        array(
+            4,                     // Specific day
+            '2015-06-25 15:12:24', // Starting time
+            '2015-05-28 00:00:00'  // Expected time
+        )
+    );
+
+    /**
      * @dataProvider shiftProvider
      * @param integer $day
      * @param string $start
@@ -37,23 +58,7 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
      * @return array
      */
     public function shiftProvider() {
-        return array(
-            array(
-                3,                     // Specific day
-                '2015-07-01 00:00:00', // Starting time
-                '2015-06-24 00:00:00'  // Expected time
-            ),
-            array(
-                3,                     // Specific day
-                '2015-07-01 15:12:24', // Starting time
-                '2015-06-24 00:00:00'  // Expected time
-            ),
-            array(
-                4,                     // Specific day
-                '2015-06-25 15:12:24', // Starting time
-                '2015-05-28 00:00:00'  // Expected time
-            )
-        );
+        return $this->fixture;
     }
 
     public function testCastNumericStringToInteger() {

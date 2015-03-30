@@ -12,6 +12,32 @@ use COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekIncrement;
 class MonthlyLastDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var array
+     */
+    private $fixture = array(
+        array(
+            1,                     // Specific day
+            '2015-06-02 00:00:00', // Starting time
+            '2015-06-29 00:00:00'  // Expected time
+        ),
+        array(
+            1,                     // Specific day
+            '2015-06-02 15:12:24', // Starting time
+            '2015-06-29 00:00:00'  // Expected time
+        ),
+        array(
+            7, // Specific day
+            '2015-06-29 15:12:24', // Starting time
+            '2015-07-26 00:00:00'  // Expected time
+        ),
+        array(
+            5, // Specific day
+            '2015-06-15 00:00:00', // Starting time
+            '2015-06-26 00:00:00'  // Expected time
+        )
+    );
+
+    /**
      * @dataProvider shiftProvider
      * @param integer $day
      * @param string $start
@@ -37,28 +63,7 @@ class MonthlyLastDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
      * @return array
      */
     public function shiftProvider() {
-        return array(
-            array(
-                1,                     // Specific day
-                '2015-06-02 00:00:00', // Starting time
-                '2015-06-29 00:00:00'  // Expected time
-            ),
-            array(
-                1,                     // Specific day
-                '2015-06-02 15:12:24', // Starting time
-                '2015-06-29 00:00:00'  // Expected time
-            ),
-            array(
-                7,                     // Specific day
-                '2015-06-29 15:12:24', // Starting time
-                '2015-07-26 00:00:00'  // Expected time
-            ),
-            array(
-                5,                     // Specific day
-                '2015-06-15 00:00:00', // Starting time
-                '2015-06-26 00:00:00'  // Expected time
-            )
-        );
+        return $this->fixture;
     }
 
     public function testCastNumericStringToInteger() {
