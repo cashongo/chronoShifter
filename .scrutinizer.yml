@@ -1,3 +1,16 @@
+build:
+  environment:
+    php:
+      version: 5.5.12
+      ini:
+        'date.timezone': 'Europe/Helsinki'
+  tests:
+    override:
+      -
+        command: 'phpunit --coverage-clover=clover.xml'
+        coverage:
+          file: 'clover.xml'
+          format: 'php-clover'
 checks:
   php:
     code_rating: true
