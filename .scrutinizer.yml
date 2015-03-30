@@ -13,5 +13,24 @@ build:
           format: 'php-clover'
 checks:
   php:
+    avoid_superglobals: true
+    avoid_usage_of_logical_operators: true
+    blank_line_after_namespace_declaration: true
     code_rating: true
     duplication: true
+    fix_php_opening_tag: true
+    no_exit: true
+    no_global_keyword: true
+    no_mixed_inline_html: true
+    no_underscore_prefix_in_methods: true
+    no_underscore_prefix_in_properties: true
+    one_class_per_file: true
+    php5_style_constructor: true
+    psr2_class_declaration: true
+    psr2_control_structure_declaration: true
+    psr2_switch_declaration: true
+    remove_php_closing_tag: true
+    require_braces_around_control_structures: true
+    security_vulnerabilities: true
+    side_effects_or_types: true
+    single_namespace_per_use: true
