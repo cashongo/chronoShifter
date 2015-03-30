@@ -12,7 +12,7 @@ namespace COG\ChronoShifter\Shifter;
 interface Shifter
 {
     /**
-     * @param \DateTime $time
+     * @param \DateTime $date
      */
-    public function shift(\DateTime $time);
+    public function shift(\DateTime $date);
 }

@@ -43,16 +43,16 @@ abstract class DayOfWeekShifter implements Shifter
         }
 
         if ($dayOfWeek > 7) {
-            throw new \OutOfBoundsException('Day of month greater than 7');
+            throw new \OutOfBoundsException('Day of week greater than 7');
         }
 
         $this->dayOfWeek = $dayOfWeek;
     }
 
     /**
-     * @param \DateTime $time
+     * @param \DateTime $date
      */
-    abstract public function shift(\DateTime $time);
+    abstract public function shift(\DateTime $date);
     /**
      * @param \DateTime $time
      * @param $dayOfWeek

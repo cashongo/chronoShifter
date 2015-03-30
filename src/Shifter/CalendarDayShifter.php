@@ -36,9 +36,9 @@ abstract class CalendarDayShifter implements Shifter
     }
 
     /**
-     * @param \DateTime $time
+     * @param \DateTime $date
      */
-    abstract public function shift(\DateTime $time);
+    abstract public function shift(\DateTime $date);
 
     /**
      * @param \DateTime $time

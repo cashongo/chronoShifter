@@ -12,15 +12,15 @@ namespace COG\ChronoShifter\Shifter;
 class CalendarDayIncrement extends CalendarDayShifter
 {
     /**
-     * @param \DateTime $time
+     * @param \DateTime $date
      */
-    public function shift(\DateTime $time) {
-        $time->setTime(0, 0, 0);
+    public function shift(\DateTime $date) {
+        $date->setTime(0, 0, 0);
 
-        if ((int) $time->format('d') >= $this->calendarDay) {
-            $time->add(new \DateInterval('P1M'));
+        if ((int) $date->format('d') >= $this->calendarDay) {
+            $date->add(new \DateInterval('P1M'));
         }
 
-        $this->setCalendarDay($time, $this->limitCalendarDay($time));
+        $this->setCalendarDay($date, $this->limitCalendarDay($date));
     }
 }

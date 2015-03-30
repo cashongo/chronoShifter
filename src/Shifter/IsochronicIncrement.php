@@ -13,21 +13,23 @@ namespace COG\ChronoShifter\Shifter;
 class IsochronicIncrement extends IsochronicShifter
 {
     /**
-     * @param \DateTime $time
+     * @param \DateTime $date
      */
-    public function shift(\DateTime $time) {
-        $time->setTime(0, 0, 0);
+    public function shift(\DateTime $date) {
+        // Ignore time
+        $date->setTime(0, 0, 0);
 
-        $timestamp = (int) $time->format('U');
+        // Current timestamp
+        $timestamp = (int) $date->format('U');
 
-        $offset = $this->getIsochronicOffset($time);
-
-        $incrementBy = $this->referenceOffset - $offset;
-
-        if ($this->referenceOffset <= $offset) {
+        // Calculate distance to next isochronic timestamp
+        $isochronicOffset = $this->getIsochronicOffset($date);
+        $incrementBy = $this->referenceOffset - $isochronicOffset;
+        if ($this->referenceOffset <= $isochronicOffset) {
             $incrementBy += $this->interval;
         }
 
-        $time->setTimestamp($timestamp + $incrementBy);
+        // Calculate new timestamp
+        $date->setTimestamp($timestamp + $incrementBy);
     }
 }

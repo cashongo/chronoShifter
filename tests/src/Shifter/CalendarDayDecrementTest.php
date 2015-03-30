@@ -39,7 +39,7 @@ class CalendarDayDecrementTest extends \PHPUnit_Framework_TestCase
     public function shiftProvider() {
         return array(
             /*
-             * (1) From February 1, 2015 to January 1, 2015
+             * (1st) From February 1, 2015 to January 1, 2015
              */
             array(
                 1,                     // Specific day
@@ -47,7 +47,7 @@ class CalendarDayDecrementTest extends \PHPUnit_Framework_TestCase
                 '2015-01-01 00:00:00'  // Expected time
             ),
             /*
-             * (1) From February 1, 2015 to January 1, 2015
+             * (1st) From February 1, 2015 to January 1, 2015
              */
             array(
                 1,                     // Specific day
@@ -55,7 +55,7 @@ class CalendarDayDecrementTest extends \PHPUnit_Framework_TestCase
                 '2014-01-01 00:00:00'  // Expected time
             ),
             /*
-             * (14) From May 15, 2013 to May 14, 2013
+             * (14th) From May 15, 2013 to May 14, 2013
              */
             array(
                 14,                    // Specific day
@@ -63,7 +63,7 @@ class CalendarDayDecrementTest extends \PHPUnit_Framework_TestCase
                 '2014-05-14 00:00:00'  // Expected time
             ),
             /*
-             * (31) From April 1, 2015 to March 31, 2015
+             * (31st) From April 1, 2015 to March 31, 2015
              */
             array(
                 31,                    // Specific day
@@ -71,7 +71,7 @@ class CalendarDayDecrementTest extends \PHPUnit_Framework_TestCase
                 '2015-03-31 00:00:00'  // Expected time
             ),
             /*
-            * (31) From March 1, 2015 to February 28, 2015
+            * (31st) From March 1, 2015 to February 28, 2015
             */
             array(
                 31,                    // Specific day
@@ -79,7 +79,7 @@ class CalendarDayDecrementTest extends \PHPUnit_Framework_TestCase
                 '2015-02-28 00:00:00'  // Expected time
             ),
             /*
-             * (31) From March 1, 2016 to February 29, 2016
+             * (31st) From March 1, 2016 to February 29, 2016
              */
             array(
                 31,                    // Specific day

@@ -13,21 +13,21 @@ namespace COG\ChronoShifter\Shifter;
 class MonthlyFirstDayOfWeekIncrement extends DayOfWeekShifter
 {
     /**
-     * @param \DateTime $time
+     * @param \DateTime $date
      */
-    public function shift(\DateTime $time) {
-        $time->setTime(0, 0, 0);
+    public function shift(\DateTime $date) {
+        $date->setTime(0, 0, 0);
 
         $firstCalendarDayWithDayOfWeek =
-            $this->getFirstCalendarDayWithDayOfWeek($time, $this->dayOfWeek);
+            $this->getFirstCalendarDayWithDayOfWeek($date, $this->dayOfWeek);
 
-        if ((int) $time->format('j') >= $firstCalendarDayWithDayOfWeek) {
-            $time->add(new \DateInterval('P1M'));
+        if ((int) $date->format('j') >= $firstCalendarDayWithDayOfWeek) {
+            $date->add(new \DateInterval('P1M'));
         }
 
         $this->setCalendarDay(
-            $time,
-            $this->getFirstCalendarDayWithDayOfWeek($time, $this->dayOfWeek)
+            $date,
+            $this->getFirstCalendarDayWithDayOfWeek($date, $this->dayOfWeek)
         );
     }
 }

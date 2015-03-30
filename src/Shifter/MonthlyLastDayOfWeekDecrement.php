@@ -13,21 +13,21 @@ namespace COG\ChronoShifter\Shifter;
 class MonthlyLastDayOfWeekDecrement extends DayOfWeekShifter
 {
     /**
-     * @param \DateTime $time
+     * @param \DateTime $date
      */
-    public function shift(\DateTime $time) {
-        $time->setTime(0, 0, 0);
+    public function shift(\DateTime $date) {
+        $date->setTime(0, 0, 0);
 
         $firstCalendarDayWithDayOfWeek =
-            $this->getLastCalendarDayWithDayOfWeek($time, $this->dayOfWeek);
+            $this->getLastCalendarDayWithDayOfWeek($date, $this->dayOfWeek);
 
-        if ((int) $time->format('j') <= $firstCalendarDayWithDayOfWeek) {
-            $time->sub(new \DateInterval('P1M'));
+        if ((int) $date->format('j') <= $firstCalendarDayWithDayOfWeek) {
+            $date->sub(new \DateInterval('P1M'));
         }
 
         $this->setCalendarDay(
-            $time,
-            $this->getLastCalendarDayWithDayOfWeek($time, $this->dayOfWeek)
+            $date,
+            $this->getLastCalendarDayWithDayOfWeek($date, $this->dayOfWeek)
         );
     }
 }

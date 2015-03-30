@@ -15,29 +15,32 @@ class IsochronicDecrement extends IsochronicShifter
     private $initTzOffset;
 
     /**
-     * @param \DateTime $time
+     * @param \DateTime $date
      */
-    public function shift(\DateTime $time) {
-        $time->setTime(0, 0, 0);
+    public function shift(\DateTime $date) {
+        // Ignore time
+        $date->setTime(0, 0, 0);
 
-        $timestamp = (int) $time->format('U');
+        // Current timestamp
+        $timestamp = (int) $date->format('U');
 
-        $this->calculateInitialTimezoneOffset($time);
+        // Store current timezone offset
+        $this->calculateInitialTimezoneOffset($date);
 
-        $offset = $this->getIsochronicOffset($time);
-
-        $decrementBy = $offset - $this->referenceOffset;
-
-        if ($this->referenceOffset >= $offset) {
+        // Calculate distance to previous isochronic timestamp
+        $isochronicOffset = $this->getIsochronicOffset($date);
+        $decrementBy = $isochronicOffset - $this->referenceOffset;
+        if ($this->referenceOffset >= $isochronicOffset) {
             $decrementBy += $this->interval;
         }
 
+        // Calculate new timestamp
         $newTimestamp = $timestamp - $decrementBy;
+        $date->setTimestamp($newTimestamp);
 
-        $time->setTimestamp($newTimestamp);
-
-        if($tzOffset = $this->getOffsetForTimezone($time)) {
-            $time->setTimestamp($newTimestamp + $tzOffset);
+        // Adjust result for time zone differences
+        if($tzOffset = $this->getOffsetForTimezone($date)) {
+            $date->setTimestamp($newTimestamp + $tzOffset);
         }
     }
 
