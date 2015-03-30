@@ -19,6 +19,7 @@ class IsochronicIncrement extends IsochronicShifter
         $time->setTime(0, 0, 0);
 
         $timestamp = (int) $time->format('U');
+
         $offset = $this->getIsochronicOffset($time);
 
         $incrementBy = $this->referenceOffset - $offset;

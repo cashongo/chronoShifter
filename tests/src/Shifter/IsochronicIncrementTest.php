@@ -115,7 +115,7 @@ class IsochronicIncrementTest extends \PHPUnit_Framework_TestCase
             array(
                 '2015-04-05 10:26:20', // Day of reference
                 '2015-03-04 00:00:00', // Starting time
-                '2015-04-01 00:00:00'  // Expected time
+                '2015-03-08 00:00:00'  // Expected time
             ),
             /*
              * Increment with DST difference
@@ -123,7 +123,7 @@ class IsochronicIncrementTest extends \PHPUnit_Framework_TestCase
             array(
                 '2015-04-05 10:26:20', // Day of reference
                 '2015-10-15 00:00:00', // Starting time
-                '2015-11-12 00:00:00'  // Expected time
+                '2015-10-18 00:00:00'  // Expected time
             )
         );
     }
