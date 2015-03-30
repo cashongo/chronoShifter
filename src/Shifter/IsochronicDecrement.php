@@ -39,7 +39,7 @@ class IsochronicDecrement extends IsochronicShifter
         $date->setTimestamp($newTimestamp);
 
         // Adjust result for time zone differences
-        if($tzOffset = $this->getOffsetForTimezone($date)) {
+        if ($tzOffset = $this->getOffsetForTimezone($date)) {
             $date->setTimestamp($newTimestamp + $tzOffset);
         }
     }

@@ -16,22 +16,22 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
      */
     private $fixture = array(
         array(
-            1,                     // Specific day
+            1, // Specific day
             '2015-06-02 00:00:00', // Starting time
             '2015-07-06 00:00:00'  // Expected time
         ),
         array(
-            1,                     // Specific day
+            1, // Specific day
             '2015-06-02 15:12:24', // Starting time
             '2015-07-06 00:00:00'  // Expected time
         ),
         array(
-            7,                     // Specific day
+            7, // Specific day
             '2015-06-02 15:12:24', // Starting time
             '2015-06-07 00:00:00'  // Expected time
         ),
         array(
-            5,                     // Specific day
+            5, // Specific day
             '2015-06-15 00:00:00', // Starting time
             '2015-07-03 00:00:00'  // Expected time
         )
