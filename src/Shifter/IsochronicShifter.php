@@ -21,7 +21,7 @@ abstract class IsochronicShifter implements Shifter
     protected $interval;
 
     /**
-     * @var \DateTime
+     * @var int
      */
     protected $referenceOffset;
 

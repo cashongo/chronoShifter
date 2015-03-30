@@ -11,14 +11,14 @@ use COG\ChronoShifter\Shifter\IsochronicIncrement;
 class ChronoShifterTest extends \PHPUnit_Framework_TestCase
 {
     public function testChronoShifterImplementsIterator() {
-        $iterator = $this->createIschronicIncrement();
+        $iterator = $this->createIsochronicIncrement();
         $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
 
         $this->assertInstanceOf('\Iterator', $shifter);
     }
 
     public function testShifterIncrementsWithShifter() {
-        $iterator = $this->createIschronicIncrement();
+        $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
         $shifter->next();
@@ -27,7 +27,7 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2015-01-15', $result->format('Y-m-d'));
     }
 
-    private function createIschronicIncrement() {
+    private function createIsochronicIncrement() {
         return new IsochronicIncrement(
             14,
             new \DateTime('2015-01-01')

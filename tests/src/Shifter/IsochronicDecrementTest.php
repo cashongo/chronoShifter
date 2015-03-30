@@ -107,6 +107,22 @@ class IsochronicDecrementTest extends \PHPUnit_Framework_TestCase
                 '2016-03-28 00:00:00', // Day of reference
                 '2016-03-15 00:00:00', // Starting time
                 '2016-02-29 00:00:00'  // Expected time
+            ),
+            /*
+             * Decrement with DST difference
+             */
+            array(
+                '2015-04-05 10:26:20', // Day of reference
+                '2015-04-01 00:00:00', // Starting time
+                '2015-03-04 00:00:00'  // Expected time
+            ),
+            /*
+             * Decrement with DST difference
+             */
+            array(
+                '2015-04-05 10:26:20', // Day of reference
+                '2015-11-12 00:00:00', // Starting time
+                '2015-10-15 00:00:00'  // Expected time
             )
         );
     }
