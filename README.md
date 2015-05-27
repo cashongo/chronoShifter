@@ -8,9 +8,15 @@
 
 Simple tools for traversal of Gregorian calendar.
 
+## Glossary
+
+* `Day of Month`: Numerical day of month 1-31, upper limit depends on given month.
+* `Day of Week`: Monday - Sunday.
+* `Workday`: A day of week that is not weekend or holiday.
+
 ### Shifters
 
-* **Calendar day**
+* **Day of Month**
     * Check if calendar day is greater than specific date.
         * Increment month if it is greater than specific date.
     * Check if given day exists in current month.
@@ -27,22 +33,22 @@ Simple tools for traversal of Gregorian calendar.
     * Increment by specified number of days.
 
 
-## Calendar day shifters
+## Day of month shifters
 
 Supports iterating over specific days of month.
 
 ### Available shifters
 
-* `COG\ChronoShifter\Shifter\CalendarDayDecrement::__construct($day : int)`
-* `COG\ChronoShifter\Shifter\CalendarDayIncrement::__construct($day : int)`
+* `COG\ChronoShifter\Shifter\DayOfMonthDecrement::__construct($day : int)`
+* `COG\ChronoShifter\Shifter\DayOfMonthIncrement::__construct($day : int)`
 
 ### Example
 
     use COG\ChronoShifter\ChronoShifter;
-    use COG\ChronoShifter\Shifter\CalendarDayIncrement;
+    use COG\ChronoShifter\Shifter\DayOfMonthIncrement;
 
     $time = new \DateTime('2015-04-07 10:26:20');
-    $shifter = new CalendarDayIncrement(14);
+    $shifter = new DayOfMonthIncrement(14);
     $iterator = new \LimitIterator(new ChronoShifter($shifter, $time), 1, 10);
     foreach($iterator as $time) {
         echo $time->format("Y-m-d H:i:s\n");
@@ -94,6 +100,35 @@ Supports iterating over specific days of month.
     2014-06-02 00:00:00
 
 
+## Monthly first workday shifters
+
+* `COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekDecrement::__construct()`
+* `COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekIncrement::__construct()`
+
+### Note
+
+The logic to determine holidays is not part of this library. This library
+provides an interface `COG\ChronoShifter\Date\HolidayProvider` which has 
+one method to specify whether the requested date is a holiday.
+
+### Example
+
+    use COG\ChronoShifter\ChronoShifter;
+    use COG\ChronoShifter\Date\HolidayProvider;
+    use My\Own\SwedishHolidayProvider;
+    
+    $holidayProvider = new SwedishHolidayProvider();
+    
+    $time = new \DateTime('2015-12-23 10:26:20');
+    $shifter = new MonthlyFirstWorkdayIncrement();
+    $shifter->setHolidayProvider($holidayProvider);
+    $shifter->shift($time);
+    echo $time->format("Y-m-d H:i:s\n");
+    
+    // Outputs
+    
+    2015-01-02 00:00:00
+        
 ## Monthly last day of week shifters
 
 ### Available shifters
@@ -159,4 +194,3 @@ Iterations such of biweekly (14) and four-weekly (28).
     2014-09-17 00:00:00
     2014-08-20 00:00:00
     2014-07-23 00:00:00
-

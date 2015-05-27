@@ -3,13 +3,13 @@
 namespace COG\ChronoShifter\Shifter;
 
 /**
- * Based class for calendar day shifters.
+ * Based class for day of month shifters.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package COG\ChronoShifter
  * @subpackage Shifter
  */
-abstract class CalendarDayShifter implements Shifter
+abstract class DayOfMonthShifter implements Shifter
 {
     /**
      * @var int
@@ -44,7 +44,7 @@ abstract class CalendarDayShifter implements Shifter
      * @param \DateTime $time
      * @return mixed
      */
-    protected function limitCalendarDay(\DateTime $time) {
+    protected function getDayLimitedToDaysInMonth(\DateTime $time) {
         return min($this->calendarDay, (int) $time->format('t'));
     }
 

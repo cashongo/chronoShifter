@@ -2,14 +2,14 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Shifter\CalendarDayIncrement;
+use COG\ChronoShifter\Shifter\DayOfMonthDecrement;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Tests\COG\ChronoShifter
  * @subpackage Shifter
  */
-class CalendarDayIncrementTest extends \PHPUnit_Framework_TestCase
+class DayOfMonthDecrementTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var array
@@ -17,32 +17,32 @@ class CalendarDayIncrementTest extends \PHPUnit_Framework_TestCase
     private $fixture = array(
         array(
             1, // Specific day
-            '2015-01-01 00:00:00', // Starting time
-            '2015-02-01 00:00:00'  // Expected time
+            '2015-02-01 00:00:00', // Starting time
+            '2015-01-01 00:00:00'  // Expected time
         ),
         array(
             1, // Specific day
-            '2014-01-01 15:12:24', // Starting time
-            '2014-02-01 00:00:00'  // Expected time
+            '2014-02-01 15:12:24', // Starting time
+            '2014-01-01 00:00:00'  // Expected time
         ),
         array(
-            15, // Specific day
-            '2014-04-14 00:00:00', // Starting time
-            '2014-04-15 00:00:00'  // Expected time
+            14, // Specific day
+            '2014-05-15 00:00:00', // Starting time
+            '2014-05-14 00:00:00'  // Expected time
         ),
         array(
             31, // Specific day
-            '2015-03-01 00:00:00', // Starting time
+            '2015-04-01 00:00:00', // Starting time
             '2015-03-31 00:00:00'  // Expected time
         ),
         array(
             31, // Specific day
-            '2015-02-01 00:00:00', // Starting time
+            '2015-03-01 00:00:00', // Starting time
             '2015-02-28 00:00:00'  // Expected time
         ),
         array(
             31, // Specific day
-            '2016-02-01 00:00:00', // Starting time
+            '2016-03-01 00:00:00', // Starting time
             '2016-02-29 00:00:00'  // Expected time
         )
     );
@@ -54,7 +54,7 @@ class CalendarDayIncrementTest extends \PHPUnit_Framework_TestCase
      * @param string $expected
      */
     public function testShift($day, $start, $expected) {
-        $shifter = new CalendarDayIncrement($day);
+        $shifter = new DayOfMonthDecrement($day);
         $date = new \DateTime($start);
         $shifter->shift($date);
 
@@ -62,7 +62,7 @@ class CalendarDayIncrementTest extends \PHPUnit_Framework_TestCase
             $expected,
             $date->format('Y-m-d H:i:s'),
             sprintf(
-                'From %s to next day of month = %d',
+                'From %s to previous day of month = %d',
                 $start,
                 $day
             )
@@ -77,9 +77,9 @@ class CalendarDayIncrementTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testCastNumericStringToInteger() {
-        $shifter = new CalendarDayIncrement('1');
+        $shifter = new DayOfMonthDecrement('1');
         $this->assertInstanceOf(
-            'COG\ChronoShifter\Shifter\CalendarDayIncrement',
+            'COG\ChronoShifter\Shifter\DayOfMonthDecrement',
             $shifter
         );
     }
@@ -88,20 +88,20 @@ class CalendarDayIncrementTest extends \PHPUnit_Framework_TestCase
      * @expectedException \InvalidArgumentException
      */
     public function testInvalidArgumentWillThrowException() {
-        new CalendarDayIncrement('1.5');
+        new DayOfMonthDecrement('1.5');
     }
 
     /**
      * @expectedException \OutOfBoundsException
      */
     public function testBelowOneDayWillThrowException() {
-        new CalendarDayIncrement(0);
+        new DayOfMonthDecrement(0);
     }
 
     /**
      * @expectedException \OutOfBoundsException
      */
     public function testAboveThirtyOneDaysWillThrowException() {
-        new CalendarDayIncrement(32);
+        new DayOfMonthDecrement(32);
     }
 }

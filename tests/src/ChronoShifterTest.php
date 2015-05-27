@@ -27,6 +27,33 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2015-01-15', $result->format('Y-m-d'));
     }
 
+    public function testShifterKeyIsTimestamp() {
+        $iterator = $this->createIsochronicIncrement();
+
+        $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
+        $shifter->next();
+
+        $date = new \DateTime();
+        $date->setTimezone(new \DateTimeZone('Europe/Helsinki'));
+        $date->setDate(2015, 01, 15)->setTime(0, 0, 0);
+
+        $this->assertEquals($date->getTimestamp(), $shifter->key());
+    }
+
+    public function testShifterPositionValidForOldDates() {
+        $iterator = $this->createIsochronicIncrement();
+
+        $shifter = new ChronoShifter($iterator, new \DateTime('1988-09-01'));
+        $this->assertTrue($shifter->valid());
+    }
+
+    public function testShifterPositionValidForFutureDates() {
+        $iterator = $this->createIsochronicIncrement();
+
+        $shifter = new ChronoShifter($iterator, new \DateTime('2100-09-01'));
+        $this->assertTrue($shifter->valid());
+    }
+
     private function createIsochronicIncrement() {
         return new IsochronicIncrement(
             14,
