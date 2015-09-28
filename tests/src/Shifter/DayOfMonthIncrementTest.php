@@ -44,6 +44,16 @@ class DayOfMonthIncrementTest extends \PHPUnit_Framework_TestCase
             31, // Specific day
             '2016-02-01 00:00:00', // Starting time
             '2016-02-29 00:00:00'  // Expected time
+        ),
+        array(
+            31, // Specific day
+            '2016-08-31 00:00:00', // Starting time
+            '2016-09-30 00:00:00'  // Expected time
+        ),
+        array(
+            31, // Specific day
+            '2016-12-31 00:00:00', // Starting time
+            '2017-01-31 00:00:00'
         )
     );
 

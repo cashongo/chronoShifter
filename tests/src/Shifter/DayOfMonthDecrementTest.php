@@ -44,6 +44,11 @@ class DayOfMonthDecrementTest extends \PHPUnit_Framework_TestCase
             31, // Specific day
             '2016-03-01 00:00:00', // Starting time
             '2016-02-29 00:00:00'  // Expected time
+        ),
+        array(
+            31, // Specific day
+            '2016-01-01 00:00:00', // Starting time
+            '2015-12-31 00:00:00'  // Expected time
         )
     );
 

@@ -53,9 +53,9 @@ Supports iterating over specific days of month.
     foreach($iterator as $time) {
         echo $time->format("Y-m-d H:i:s\n");
     }
-    
+
     // Outputs
-    
+
     2015-04-14 00:00:00
     2015-05-14 00:00:00
     2015-06-14 00:00:00
@@ -66,6 +66,12 @@ Supports iterating over specific days of month.
     2015-11-14 00:00:00
     2015-12-14 00:00:00
     2016-01-14 00:00:00
+
+### Notes
+
+It is possible that the `Day of Month` is greater than number of
+days in a given month. In this case the month will not be skipped, instead
+last day of month will be used.
 
 ## Monthly first day of week shifters
 
@@ -85,9 +91,9 @@ Supports iterating over specific days of month.
     foreach($iterator as $time) {
         echo $time->format("Y-m-d H:i:s\n");
     }
-    
+
     // Outputs
-    
+
     2015-03-02 00:00:00
     2015-02-02 00:00:00
     2015-01-05 00:00:00
@@ -108,7 +114,7 @@ Supports iterating over specific days of month.
 ### Note
 
 The logic to determine holidays is not part of this library. This library
-provides an interface `COG\ChronoShifter\Date\HolidayProvider` which has 
+provides an interface `COG\ChronoShifter\Date\HolidayProvider` which has
 one method to specify whether the requested date is a holiday.
 
 ### Example
@@ -116,19 +122,19 @@ one method to specify whether the requested date is a holiday.
     use COG\ChronoShifter\ChronoShifter;
     use COG\ChronoShifter\Date\HolidayProvider;
     use My\Own\SwedishHolidayProvider;
-    
+
     $holidayProvider = new SwedishHolidayProvider();
-    
+
     $time = new \DateTime('2015-12-23 10:26:20');
     $shifter = new MonthlyFirstWorkdayIncrement();
     $shifter->setHolidayProvider($holidayProvider);
     $shifter->shift($time);
     echo $time->format("Y-m-d H:i:s\n");
-    
+
     // Outputs
-    
+
     2015-01-02 00:00:00
-        
+
 ## Monthly last day of week shifters
 
 ### Available shifters
@@ -140,16 +146,16 @@ one method to specify whether the requested date is a holiday.
 
     use COG\ChronoShifter\ChronoShifter;
     use COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekIncrement;
-    
+
     $time = new \DateTime('2015-04-05 10:26:20');
     $shifter = new MonthlyLastDayOfWeekIncrement(MonthlyFirstDayOfWeekDecrement::MONDAY);
     $iterator = new \LimitIterator(new ChronoShifter($shifter, $time), 1, 10);
     foreach($iterator as $time) {
         echo $time->format("Y-m-d H:i:s\n");
     }
-    
+
     // Outputs
-    
+
     2015-04-27 00:00:00
     2015-05-25 00:00:00
     2015-06-29 00:00:00
@@ -174,16 +180,16 @@ Iterations such of biweekly (14) and four-weekly (28).
 
     use COG\ChronoShifter\ChronoShifter;
     use COG\ChronoShifter\Shifter\IsochronicDecrement;
-    
+
     $time = new \DateTime('2015-04-05 10:26:20');
     $shifter = new IsochronicDecrement(28, new \DateTime('2015-04-01'));
     $iterator = new \LimitIterator(new ChronoShifter($shifter, $time), 1, 10);
     foreach($iterator as $time) {
         echo $time->format("Y-m-d H:i:s\n");
     }
-    
+
     // Outputs
-    
+
     2015-04-01 00:00:00
     2015-03-04 00:00:00
     2015-02-04 00:00:00

@@ -111,4 +111,36 @@ class Date
     public function subtractInterval($interval) {
         $this->date->sub(new \DateInterval($interval));
     }
+
+    public function addMonth() {
+        $year = $this->date->format('Y');
+        $month = (int) $this->date->format('n') + 1;
+        if (13 === $month) {
+            $month = 1;
+            $year++;
+        }
+        $day = $this->date->format('j');
+        $this->date->setDate($year, $month, 1);
+        $this->date->setDate($year, $month, min($day, $this->getDaysInMonth()));
+    }
+
+    public function subtractMonth() {
+        $year = $this->date->format('Y');
+        $month = (int) $this->date->format('n') - 1;
+        if (0 === $month) {
+            $month = 12;
+            $year--;
+        }
+        $day = $this->date->format('j');
+        $this->date->setDate($year, $month, 1);
+        $this->date->setDate($year, $month, min($day, $this->getDaysInMonth()));
+    }
+
+    /**
+     * @return int
+     */
+    public function getDaysInMonth()
+    {
+        return (int) $this->date->format('t');
+    }
 }
