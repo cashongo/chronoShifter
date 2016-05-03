@@ -186,15 +186,19 @@ class DateDecorator
      */
     public function toFirstWorkday()
     {
-        // Increment date until we have a banking day
-        for ($dayOfMonth = 1; $dayOfMonth < $this->date->format('t'); $dayOfMonth++) {
-            $this->setDayOfMonth($dayOfMonth);
+        $this->setDayOfMonth(1);
+        $this->incrementToWorkday();
 
-            $bankingDay = $this->isWeekday() && !$this->isHoliday();
+        return $this;
+    }
 
-            if ($bankingDay) {
-                break;
-            }
+    /**
+     * @return $this
+     */
+    public function incrementToWorkday()
+    {
+        while (!$this->isWeekday() || $this->isHoliday()) {
+            $this->date->add(new \DateInterval('P1D'));
         }
 
         return $this;
@@ -205,15 +209,19 @@ class DateDecorator
      */
     public function toLastWorkday()
     {
-        // Decrement date until we have a banking day
-        for ($dayOfMonth = $this->date->format('t'); $dayOfMonth >= 1 ; $dayOfMonth--) {
-            $this->setDayOfMonth($dayOfMonth);
+        $this->setDayOfMonth((int)$this->date->format('t'));
+        $this->decrementToWorkday();
 
-            $bankingDay = $this->isWeekday() && !$this->isHoliday();
+        return $this;
+    }
 
-            if ($bankingDay) {
-                break;
-            }
+    /**
+     * @return $this
+     */
+    public function decrementToWorkday()
+    {
+        while (!$this->isWeekday() || $this->isHoliday()) {
+            $this->date->sub(new \DateInterval('P1D'));
         }
 
         return $this;
