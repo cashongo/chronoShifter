@@ -6,8 +6,7 @@ namespace COG\ChronoShifter\Shifter;
  * Base class for isochronic shifters iterating on an isochronic axis of time.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
 abstract class IsochronicShifter implements Shifter
 {

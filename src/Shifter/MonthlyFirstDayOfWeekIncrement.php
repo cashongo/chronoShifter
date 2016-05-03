@@ -7,8 +7,7 @@ namespace COG\ChronoShifter\Shifter;
  * the month.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
 class MonthlyFirstDayOfWeekIncrement extends DayOfWeekShifter
 {

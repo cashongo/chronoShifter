@@ -14,8 +14,7 @@ use COG\ChronoShifter\Date\HolidayProvider;
  * Increments to next matching next first non-holiday weekday (M-F) of month
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
 class MonthlyFirstWorkdayIncrement {
     /**

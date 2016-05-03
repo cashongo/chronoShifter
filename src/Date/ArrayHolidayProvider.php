@@ -6,8 +6,7 @@ namespace COG\ChronoShifter\Date;
  * Simple holiday provider if all possible holidays can be known ahead of time.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Date
+ * @package Date\Domain
  */
 class ArrayHolidayProvider implements HolidayProvider
 {

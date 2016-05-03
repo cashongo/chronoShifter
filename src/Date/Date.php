@@ -8,8 +8,7 @@ use LogicException;
  * Internal date object wrapped around PHP \DateTime
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Date
+ * @package Date\Domain
  */
 class Date
 {

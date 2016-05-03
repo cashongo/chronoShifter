@@ -6,8 +6,7 @@ use COG\ChronoShifter\Shifter\DayOfMonthDecrement;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package Tests\COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Test
  */
 class DayOfMonthDecrementTest extends \PHPUnit_Framework_TestCase
 {

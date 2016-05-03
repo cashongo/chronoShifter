@@ -7,8 +7,7 @@ namespace COG\ChronoShifter\Shifter;
  * the axis of time.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
 class IsochronicDecrement extends IsochronicShifter
 {

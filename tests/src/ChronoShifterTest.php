@@ -7,6 +7,7 @@ use COG\ChronoShifter\Shifter\IsochronicIncrement;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
+ * @package Test
  */
 class ChronoShifterTest extends \PHPUnit_Framework_TestCase
 {

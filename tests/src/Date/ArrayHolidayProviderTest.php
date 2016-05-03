@@ -6,8 +6,7 @@ use COG\ChronoShifter\Date\ArrayHolidayProvider;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package Tests\COG\ChronoShifter
- * @subpackage Date
+ * @package Date\Test
  */
 class ArrayHolidayProviderTest extends \PHPUnit_Framework_TestCase
 {

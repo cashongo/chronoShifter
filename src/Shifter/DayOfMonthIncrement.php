@@ -8,8 +8,7 @@ use COG\ChronoShifter\Date\Date;
  * Increments the date to first day with specified day of month.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
 class DayOfMonthIncrement extends DayOfMonthShifter
 {
