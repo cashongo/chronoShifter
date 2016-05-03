@@ -19,6 +19,16 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Iterator', $shifter);
     }
 
+    public function testShifterBeginsFromFirstMatch()
+    {
+        $iterator = $this->createIsochronicIncrement();
+
+        $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
+        $result = $shifter->current();
+
+        $this->assertEquals('2015-01-15', $result->format('Y-m-d'));
+    }
+
     public function testShifterIncrementsWithShifter()
     {
         $iterator = $this->createIsochronicIncrement();
@@ -27,7 +37,7 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
         $shifter->next();
         $result = $shifter->current();
 
-        $this->assertEquals('2015-01-15', $result->format('Y-m-d'));
+        $this->assertEquals('2015-01-29', $result->format('Y-m-d'));
     }
 
     public function testShifterKeyIsTimestamp()

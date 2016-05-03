@@ -18,6 +18,11 @@ class ChronoShifter implements \Iterator
     /**
      * @var \DateTime
      */
+    private $originalTime;
+
+    /**
+     * @var \DateTime
+     */
     private $time;
 
     /**
@@ -27,7 +32,10 @@ class ChronoShifter implements \Iterator
     public function __construct(Shifter $shifter, \DateTime $time = null)
     {
         $this->shifter = $shifter;
+        $this->originalTime = clone $time;
         $this->time = $time;
+
+        $this->rewind();
     }
 
     /**
@@ -68,5 +76,7 @@ class ChronoShifter implements \Iterator
      */
     public function rewind()
     {
+        $this->time->setTimestamp($this->originalTime->getTimestamp());
+        $this->next();
     }
 }
