@@ -2,6 +2,7 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
+use COG\ChronoShifter\Date\ArrayHolidayProvider;
 use COG\ChronoShifter\Shifter\MonthlyFirstWorkdayDecrement;
 
 /**
@@ -16,23 +17,43 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
     private $fixture = array(
         array(
             '2015-06-02 00:00:00', // Starting time
-            '2015-05-01 00:00:00'  // Expected time
+            '2015-05-01 00:00:00', // Expected time
+            [
+                '2015-06-01',      // Holidays
+                '2015-06-02'
+            ]
         ),
         array(
             '2015-06-02 15:12:24', // Starting time
-            '2015-05-01 00:00:00'  // Expected time
+            '2015-05-01 00:00:00', // Expected time
+            [
+                '2015-06-01',      // Holidays
+                '2015-06-02'
+            ]
         ),
         array(
             '2014-02-02 15:12:24', // Starting time
-            '2014-01-01 00:00:00'  // Expected time
+            '2014-01-01 00:00:00', // Expected time
+            [
+                '2015-02-03',      // Holidays
+                '2015-02-04'
+            ]
         ),
         array(
             '2015-04-30 00:00:00', // Starting time
-            '2015-04-03 00:00:00'  // Expected time
+            '2015-04-03 00:00:00', // Expected time
+            [
+                '2015-04-01',      // Holidays
+                '2015-04-02'
+            ]
         ),
         array(
             '2015-11-30 00:00:00', // Starting time
-            '2015-11-04 00:00:00'  // Expected time
+            '2015-11-04 00:00:00', // Expected time
+            [
+                '2015-11-02',      // Holidays
+                '2015-11-03'
+            ]
         )
     );
 
@@ -40,24 +61,12 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
      * @dataProvider shiftProvider
      * @param string $start
      * @param string $expected
+     * @param string[] $holidays
      */
-    public function testShift($start, $expected)
+    public function testShift($start, $expected, $holidays)
     {
-        $holidayProvider = $this
-            ->getMockBuilder('COG\ChronoShifter\Date\HolidayProvider')
-            ->setMethods(array('isHoliday'))
-            ->getMockForAbstractClass();
-
-        $holidayProvider->expects($this->any())
-            ->method('isHoliday')
-            ->willReturnOnConsecutiveCalls(
-                true,
-                true,
-                false
-            );
-
         $shifter = new MonthlyFirstWorkdayDecrement();
-        $shifter->setHolidayProvider($holidayProvider);
+        $shifter->setHolidayProvider(new ArrayHolidayProvider($holidays));
 
         $date = new \DateTime($start);
         $shifter->shift($date);
