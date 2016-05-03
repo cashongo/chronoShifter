@@ -8,7 +8,7 @@ use COG\ChronoShifter\Shifter\MonthlyFirstWorkdayDecrement;
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Shifter\Test
  */
-class MonthlyFirstWeekdayDecrementTest extends \PHPUnit_Framework_TestCase
+class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var array
