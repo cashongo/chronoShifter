@@ -69,8 +69,7 @@ class MonthlyLastWorkdayIncrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShift($start, $expected, $holidays = array())
     {
-        $shifter = new MonthlyLastWorkdayIncrement();
-        $shifter->setHolidayProvider(new ArrayHolidayProvider($holidays));
+        $shifter = new MonthlyLastWorkdayIncrement(new ArrayHolidayProvider($holidays));
         $date = new \DateTime($start);
         $shifter->shift($date);
 
@@ -83,16 +82,7 @@ class MonthlyLastWorkdayIncrementTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
-
-    /**
-     * @expectedException \LogicException
-     */
-    public function testShifterWithoutHolidayProviderThrowsException()
-    {
-        $shifter = new MonthlyLastWorkdayIncrement();
-        $shifter->shift(new \DateTime('2015-01-01'));
-    }
-
+    
     /**
      * @return array
      */

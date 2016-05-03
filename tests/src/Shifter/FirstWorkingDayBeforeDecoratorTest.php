@@ -16,7 +16,8 @@ class FirstWorkingDayBeforeDecoratorTest extends \PHPUnit_Framework_TestCase
         $shifter = $this->getMockForShifterReturningDate('2015-10-19 00:00:00');
 
         $decorator = new FirstWorkingDayBeforeDecorator($shifter, new ArrayHolidayProvider(array()));
-        $result = $decorator->shift(new \DateTime());
+        $result = new \DateTime();
+        $decorator->shift($result);
 
         $this->assertEquals('2015-10-19', $result->format('Y-m-d'));
     }
@@ -26,7 +27,8 @@ class FirstWorkingDayBeforeDecoratorTest extends \PHPUnit_Framework_TestCase
         $shifter = $this->getMockForShifterReturningDate('2015-10-18 00:00:00');
 
         $decorator = new FirstWorkingDayBeforeDecorator($shifter, new ArrayHolidayProvider(array()));
-        $result = $decorator->shift(new \DateTime());
+        $result = new \DateTime();
+        $decorator->shift($result);
 
         $this->assertEquals('2015-10-16', $result->format('Y-m-d'));
     }
@@ -36,7 +38,8 @@ class FirstWorkingDayBeforeDecoratorTest extends \PHPUnit_Framework_TestCase
         $shifter = $this->getMockForShifterReturningDate('2015-10-18 00:00:00');
 
         $decorator = new FirstWorkingDayBeforeDecorator($shifter, new ArrayHolidayProvider(array('2015-10-16')));
-        $result = $decorator->shift(new \DateTime());
+        $result = new \DateTime();
+        $decorator->shift($result);
 
         $this->assertEquals('2015-10-15', $result->format('Y-m-d'));
     }
@@ -54,7 +57,9 @@ class FirstWorkingDayBeforeDecoratorTest extends \PHPUnit_Framework_TestCase
         $shifter
             ->expects($this->once())
             ->method('shift')
-            ->will($this->returnValue(new \DateTime($date)));
+            ->with($this->callback(function (\DateTime $dateTime) use ($date) {
+                return $dateTime->setTimestamp(strtotime($date));
+            }));
 
         return $shifter;
     }

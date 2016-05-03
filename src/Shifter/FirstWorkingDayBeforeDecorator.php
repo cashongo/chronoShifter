@@ -39,7 +39,6 @@ class FirstWorkingDayBeforeDecorator implements Shifter
         $this->shifter->shift($dateTime);
         $result = new DateDecorator($dateTime);
         $result->setHolidayProvider($this->holidayProvider);
-
-        return $result->decrementToWorkday()->getDateTime();
+        $dateTime->setTimestamp($result->decrementToWorkday()->getDateTime()->getTimestamp());
     }
 }

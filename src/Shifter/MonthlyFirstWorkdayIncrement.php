@@ -16,12 +16,20 @@ use COG\ChronoShifter\Date\HolidayProvider;
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Shifter\Domain
  */
-class MonthlyFirstWorkdayIncrement
+class MonthlyFirstWorkdayIncrement implements Shifter
 {
     /**
      * @var \COG\ChronoShifter\Date\HolidayProvider
      */
     private $holidayProvider;
+
+    /**
+     * @param HolidayProvider $provider
+     */
+    public function __construct(HolidayProvider $provider)
+    {
+        $this->holidayProvider = $provider;
+    }
 
     /**
      * @param \DateTime $dateTime
@@ -39,21 +47,5 @@ class MonthlyFirstWorkdayIncrement
         if ($date->getDayOfMonth() <= $dayOfMonth) {
             $date->addMonth()->toFirstWorkday();
         }
-    }
-
-    /**
-     * @return HolidayProvider
-     */
-    public function getHolidayProvider()
-    {
-        return $this->holidayProvider;
-    }
-
-    /**
-     * @param HolidayProvider $provider
-     */
-    public function setHolidayProvider(HolidayProvider $provider)
-    {
-        $this->holidayProvider = $provider;
     }
 }

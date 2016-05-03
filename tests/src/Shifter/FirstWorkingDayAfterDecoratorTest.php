@@ -16,9 +16,9 @@ class FirstWorkingDayAfterDecoratorTest extends \PHPUnit_Framework_TestCase
         $shifter = $this->getMockForShifterReturningDate('2015-10-16 00:00:00');
 
         $decorator = new FirstWorkingDayAfterDecorator($shifter, new ArrayHolidayProvider(array()));
-        $result = $decorator->shift(new \DateTime());
-
-        $this->assertEquals('2015-10-16', $result->format('Y-m-d'));
+        $date = new \DateTime();
+        $decorator->shift($date);
+        $this->assertEquals('2015-10-16', $date->format('Y-m-d'));
     }
 
     public function testDecrementDateIfWeekend()
@@ -26,9 +26,10 @@ class FirstWorkingDayAfterDecoratorTest extends \PHPUnit_Framework_TestCase
         $shifter = $this->getMockForShifterReturningDate('2015-10-17 00:00:00');
 
         $decorator = new FirstWorkingDayAfterDecorator($shifter, new ArrayHolidayProvider(array()));
-        $result = $decorator->shift(new \DateTime());
+        $date = new \DateTime();
+        $decorator->shift($date);
 
-        $this->assertEquals('2015-10-19', $result->format('Y-m-d'));
+        $this->assertEquals('2015-10-19', $date->format('Y-m-d'));
     }
 
     public function testDecrementDateIfHoliday()
@@ -36,9 +37,9 @@ class FirstWorkingDayAfterDecoratorTest extends \PHPUnit_Framework_TestCase
         $shifter = $this->getMockForShifterReturningDate('2015-10-16 00:00:00');
 
         $decorator = new FirstWorkingDayAfterDecorator($shifter, new ArrayHolidayProvider(array('2015-10-16')));
-        $result = $decorator->shift(new \DateTime());
-
-        $this->assertEquals('2015-10-19', $result->format('Y-m-d'));
+        $date = new \DateTime();
+        $decorator->shift($date);
+        $this->assertEquals('2015-10-19', $date->format('Y-m-d'));
     }
 
     /**
@@ -54,7 +55,9 @@ class FirstWorkingDayAfterDecoratorTest extends \PHPUnit_Framework_TestCase
         $shifter
             ->expects($this->once())
             ->method('shift')
-            ->will($this->returnValue(new \DateTime($date)));
+            ->with($this->callback(function (\DateTime $dateTime) use ($date) {
+                return $dateTime->setTimestamp(strtotime($date));
+            }));
 
         return $shifter;
     }

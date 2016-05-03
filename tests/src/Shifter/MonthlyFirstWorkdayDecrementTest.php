@@ -71,8 +71,7 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShift($start, $expected, $holidays = array())
     {
-        $shifter = new MonthlyFirstWorkdayDecrement();
-        $shifter->setHolidayProvider(new ArrayHolidayProvider($holidays));
+        $shifter = new MonthlyFirstWorkdayDecrement(new ArrayHolidayProvider($holidays));
 
         $date = new \DateTime($start);
         $shifter->shift($date);
@@ -85,15 +84,6 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
                 $start
             )
         );
-    }
-
-    /**
-     * @expectedException \LogicException
-     */
-    public function testShifterWithoutHolidayProviderThrowsException()
-    {
-        $shifter = new MonthlyFirstWorkdayDecrement();
-        $shifter->shift(new \DateTime('2015-01-01'));
     }
 
     /**

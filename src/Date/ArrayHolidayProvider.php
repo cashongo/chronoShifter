@@ -18,7 +18,7 @@ class ArrayHolidayProvider implements HolidayProvider
     /**
      * @param string[] $holidays List of holidays each in YYYY-MM-DD format.
      */
-    public function __construct(array $holidays)
+    public function __construct(array $holidays = array())
     {
         $this->holidays = $holidays;
     }

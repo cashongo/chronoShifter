@@ -15,12 +15,20 @@ use COG\ChronoShifter\Date\HolidayProvider;
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Shifter\Domain
  */
-class MonthlyLastWorkdayIncrement
+class MonthlyLastWorkdayIncrement implements Shifter
 {
     /**
      * @var \COG\ChronoShifter\Date\HolidayProvider
      */
     private $holidayProvider;
+
+    /**
+     * @param HolidayProvider $provider
+     */
+    public function __construct(HolidayProvider $provider)
+    {
+        $this->holidayProvider = $provider;
+    }
 
     /**
      * @param \DateTime $dateTime
@@ -37,21 +45,5 @@ class MonthlyLastWorkdayIncrement
         if ($date->getDayOfMonth() <= $dayOfMonth) {
             $date->addMonth()->toLastWorkday();
         }
-    }
-
-    /**
-     * @return HolidayProvider
-     */
-    public function getHolidayProvider()
-    {
-        return $this->holidayProvider;
-    }
-
-    /**
-     * @param HolidayProvider $provider
-     */
-    public function setHolidayProvider(HolidayProvider $provider)
-    {
-        $this->holidayProvider = $provider;
     }
 }
