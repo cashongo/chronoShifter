@@ -16,8 +16,8 @@ namespace COG\ChronoShifter\Date;
 interface HolidayProvider
 {
     /**
-     * @param string $date
+     * @param \DateTime $date
      * @return boolean
      */
-    public function isHoliday($date);
+    public function isHoliday(\DateTime $date);
 }
