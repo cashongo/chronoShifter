@@ -83,7 +83,8 @@ class IsochronicIncrementTest extends \PHPUnit_Framework_TestCase
      * @param string $start
      * @param string $expected
      */
-    public function testShift($reference, $start, $expected) {
+    public function testShift($reference, $start, $expected)
+    {
         $shifter = new IsochronicIncrement(28, new \DateTime($reference));
         $date = new \DateTime($start);
         $shifter->shift($date);
@@ -102,7 +103,8 @@ class IsochronicIncrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function shiftProvider() {
+    public function shiftProvider()
+    {
         return $this->fixture;
     }
 }

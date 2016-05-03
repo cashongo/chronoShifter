@@ -27,35 +27,40 @@ class Date
     /**
      * @param \DateTime $date
      */
-    public function __construct(\DateTime $date) {
+    public function __construct(\DateTime $date)
+    {
         $this->setDateTime($date);
     }
 
     /**
      * @return \DateTime ISO8601
      */
-    public function getDateTime() {
+    public function getDateTime()
+    {
         return $this->date;
     }
 
     /**
      * @param \DateTime $date
      */
-    public function setDateTime(\DateTime $date) {
+    public function setDateTime(\DateTime $date)
+    {
         $this->date = $date->setTime(0, 0, 0);
     }
 
     /**
      * @return int
      */
-    public function getDayOfMonth() {
-        return (int) $this->date->format('j');
+    public function getDayOfMonth()
+    {
+        return (int)$this->date->format('j');
     }
 
     /**
      * @param $day
      */
-    public function setDayOfMonth($day) {
+    public function setDayOfMonth($day)
+    {
         $this->date->setDate(
             $this->date->format('Y'),
             $this->date->format('n'),
@@ -67,8 +72,9 @@ class Date
      * @return bool
      * @throws LogicException If holiday provider not specified
      */
-    public function isHoliday() {
-        if(false === $this->holiday instanceof HolidayProvider) {
+    public function isHoliday()
+    {
+        if (false === $this->holiday instanceof HolidayProvider) {
             throw new LogicException('Holiday provider required');
         }
 
@@ -78,42 +84,48 @@ class Date
     /**
      * @return bool
      */
-    public function isWeekday() {
-        $dayOfWeek = (int) $this->date->format('N');
+    public function isWeekday()
+    {
+        $dayOfWeek = (int)$this->date->format('N');
         return $dayOfWeek <= 5;
     }
 
     /**
      * @return HolidayProvider
      */
-    public function getHolidayProvider() {
+    public function getHolidayProvider()
+    {
         return $this->holiday;
     }
 
     /**
      * @param HolidayProvider $provider
      */
-    public function setHolidayProvider(HolidayProvider $provider) {
+    public function setHolidayProvider(HolidayProvider $provider)
+    {
         $this->holiday = $provider;
     }
 
     /**
      * @param $interval
      */
-    public function addInterval($interval) {
+    public function addInterval($interval)
+    {
         $this->date->add(new \DateInterval($interval));
     }
 
     /**
      * @param $interval
      */
-    public function subtractInterval($interval) {
+    public function subtractInterval($interval)
+    {
         $this->date->sub(new \DateInterval($interval));
     }
 
-    public function addMonth() {
+    public function addMonth()
+    {
         $year = $this->date->format('Y');
-        $month = (int) $this->date->format('n') + 1;
+        $month = (int)$this->date->format('n') + 1;
         if (13 === $month) {
             $month = 1;
             $year++;
@@ -123,9 +135,10 @@ class Date
         $this->date->setDate($year, $month, min($day, $this->getDaysInMonth()));
     }
 
-    public function subtractMonth() {
+    public function subtractMonth()
+    {
         $year = $this->date->format('Y');
-        $month = (int) $this->date->format('n') - 1;
+        $month = (int)$this->date->format('n') - 1;
         if (0 === $month) {
             $month = 12;
             $year--;
@@ -140,6 +153,6 @@ class Date
      */
     public function getDaysInMonth()
     {
-        return (int) $this->date->format('t');
+        return (int)$this->date->format('t');
     }
 }

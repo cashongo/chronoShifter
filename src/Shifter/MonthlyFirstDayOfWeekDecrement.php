@@ -14,13 +14,14 @@ class MonthlyFirstDayOfWeekDecrement extends DayOfWeekShifter
     /**
      * @param \DateTime $date
      */
-    public function shift(\DateTime $date) {
+    public function shift(\DateTime $date)
+    {
         $date->setTime(0, 0, 0);
 
         $firstCalendarDayWithDayOfWeek =
             $this->getFirstCalendarDayWithDayOfWeek($date, $this->dayOfWeek);
 
-        if ((int) $date->format('j') <= $firstCalendarDayWithDayOfWeek) {
+        if ((int)$date->format('j') <= $firstCalendarDayWithDayOfWeek) {
             $date->sub(new \DateInterval('P1M'));
         }
 

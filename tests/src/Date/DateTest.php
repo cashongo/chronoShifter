@@ -13,17 +13,20 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \LogicException
      */
-    public function testCheckHolidayWithoutProviderThrowsLogicException() {
+    public function testCheckHolidayWithoutProviderThrowsLogicException()
+    {
         $date = new Date(new \DateTime());
         $date->isHoliday();
     }
 
-    public function testDateWithoutHolidayProviderDefaultsToNull() {
+    public function testDateWithoutHolidayProviderDefaultsToNull()
+    {
         $date = new Date(new \DateTime());
         $this->assertEquals(null, $date->getHolidayProvider());
     }
 
-    public function testDateWithHolidayProviderCanAccessHolidayProvider() {
+    public function testDateWithHolidayProviderCanAccessHolidayProvider()
+    {
         $holidayProvider = $this
             ->getMockBuilder('COG\ChronoShifter\Date\HolidayProvider')
             ->setMethods(array('isHoliday'))

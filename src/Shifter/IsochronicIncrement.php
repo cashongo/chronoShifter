@@ -14,12 +14,13 @@ class IsochronicIncrement extends IsochronicShifter
     /**
      * @param \DateTime $date
      */
-    public function shift(\DateTime $date) {
+    public function shift(\DateTime $date)
+    {
         // Ignore time
         $date->setTime(0, 0, 0);
 
         // Current timestamp
-        $timestamp = (int) $date->format('U');
+        $timestamp = (int)$date->format('U');
 
         // Calculate distance to next isochronic timestamp
         $isochronicOffset = $this->getIsochronicOffset($date);

@@ -16,7 +16,8 @@ use COG\ChronoShifter\Date\HolidayProvider;
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Shifter\Domain
  */
-class MonthlyFirstWorkdayDecrement {
+class MonthlyFirstWorkdayDecrement
+{
     /**
      * @var \COG\ChronoShifter\Date\HolidayProvider
      */
@@ -25,8 +26,9 @@ class MonthlyFirstWorkdayDecrement {
     /**
      * @param \DateTime $dateTime
      */
-    public function shift(\DateTime $dateTime) {
-        if(!$this->holidayProvider instanceof HolidayProvider) {
+    public function shift(\DateTime $dateTime)
+    {
+        if (!$this->holidayProvider instanceof HolidayProvider) {
             throw new \LogicException('Holiday provider required');
         }
 
@@ -45,21 +47,24 @@ class MonthlyFirstWorkdayDecrement {
     /**
      * @return HolidayProvider
      */
-    public function getHolidayProvider() {
+    public function getHolidayProvider()
+    {
         return $this->holidayProvider;
     }
 
     /**
      * @param HolidayProvider $provider
      */
-    public function setHolidayProvider(HolidayProvider $provider) {
+    public function setHolidayProvider(HolidayProvider $provider)
+    {
         $this->holidayProvider = $provider;
     }
 
     /**
      * @param Date $date
      */
-    private function toFirstWorkday(Date $date) {
+    private function toFirstWorkday(Date $date)
+    {
         // Increment date until we have a banking day
         for ($dayOfMonth = 1; $dayOfMonth < 30; $dayOfMonth++) {
             $date->setDayOfMonth($dayOfMonth);

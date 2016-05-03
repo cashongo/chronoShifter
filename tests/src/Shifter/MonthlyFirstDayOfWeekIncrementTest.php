@@ -42,7 +42,8 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
      * @param string $start
      * @param string $expected
      */
-    public function testShift($day, $start, $expected) {
+    public function testShift($day, $start, $expected)
+    {
         $shifter = new MonthlyFirstDayOfWeekIncrement($day);
         $date = new \DateTime($start);
         $shifter->shift($date);
@@ -61,11 +62,13 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function shiftProvider() {
+    public function shiftProvider()
+    {
         return $this->fixture;
     }
 
-    public function testCastNumericStringToInteger() {
+    public function testCastNumericStringToInteger()
+    {
         $shifter = new MonthlyFirstDayOfWeekIncrement('1');
         $this->assertInstanceOf(
             'COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekIncrement',
@@ -76,21 +79,24 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidArgumentWillThrowException() {
+    public function testInvalidArgumentWillThrowException()
+    {
         new MonthlyFirstDayOfWeekIncrement('1.5');
     }
 
     /**
      * @expectedException \OutOfBoundsException
      */
-    public function testBelowOneDayWillThrowException() {
+    public function testBelowOneDayWillThrowException()
+    {
         new MonthlyFirstDayOfWeekIncrement(0);
     }
 
     /**
      * @expectedException \OutOfBoundsException
      */
-    public function testAboveThirtyOneDaysWillThrowException() {
+    public function testAboveThirtyOneDaysWillThrowException()
+    {
         new MonthlyFirstDayOfWeekIncrement(8);
     }
 }

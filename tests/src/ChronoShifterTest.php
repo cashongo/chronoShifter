@@ -11,14 +11,16 @@ use COG\ChronoShifter\Shifter\IsochronicIncrement;
  */
 class ChronoShifterTest extends \PHPUnit_Framework_TestCase
 {
-    public function testChronoShifterImplementsIterator() {
+    public function testChronoShifterImplementsIterator()
+    {
         $iterator = $this->createIsochronicIncrement();
         $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
 
         $this->assertInstanceOf('\Iterator', $shifter);
     }
 
-    public function testShifterIncrementsWithShifter() {
+    public function testShifterIncrementsWithShifter()
+    {
         $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
@@ -28,7 +30,8 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2015-01-15', $result->format('Y-m-d'));
     }
 
-    public function testShifterKeyIsTimestamp() {
+    public function testShifterKeyIsTimestamp()
+    {
         $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
@@ -41,14 +44,16 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('integer', $shifter->key());
     }
 
-    public function testShifterPositionValidForOldDates() {
+    public function testShifterPositionValidForOldDates()
+    {
         $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('1988-09-01'));
         $this->assertTrue($shifter->valid());
     }
 
-    public function testShifterPositionValidForFutureDates() {
+    public function testShifterPositionValidForFutureDates()
+    {
         $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('2100-09-01'));
@@ -58,7 +63,8 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return IsochronicIncrement
      */
-    private function createIsochronicIncrement() {
+    private function createIsochronicIncrement()
+    {
         return new IsochronicIncrement(
             14,
             new \DateTime('2015-01-01')

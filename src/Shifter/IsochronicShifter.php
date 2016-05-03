@@ -28,7 +28,8 @@ abstract class IsochronicShifter implements Shifter
      * @param int $days
      * @param \DateTime $referenceDate
      */
-    public function __construct($days, \DateTime $referenceDate) {
+    public function __construct($days, \DateTime $referenceDate)
+    {
         $this->interval = $days * self::SECONDS_IN_DAY;
         $this->referenceOffset = $this->getIsochronicOffset($referenceDate);
     }
@@ -42,7 +43,8 @@ abstract class IsochronicShifter implements Shifter
      * @param \DateTime $time
      * @return int
      */
-    protected function getIsochronicOffset(\DateTime $time) {
+    protected function getIsochronicOffset(\DateTime $time)
+    {
         return $this->skipTimeAndTimezone($time) % $this->interval;
     }
 
@@ -50,7 +52,8 @@ abstract class IsochronicShifter implements Shifter
      * @param \DateTime $time
      * @return int
      */
-    private function skipTimeAndTimezone(\DateTime $time) {
+    private function skipTimeAndTimezone(\DateTime $time)
+    {
         $result = new \DateTime();
         $result->setTimezone(new \DateTimeZone('UTC'));
         $result->setTime(0, 0, 0);
@@ -59,6 +62,6 @@ abstract class IsochronicShifter implements Shifter
             $time->format('n'),
             $time->format('j')
         );
-        return (int) $result->format('U');
+        return (int)$result->format('U');
     }
 }

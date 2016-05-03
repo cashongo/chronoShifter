@@ -15,7 +15,8 @@ class DayOfMonthDecrement extends DayOfMonthShifter
     /**
      * @param \DateTime $dateTime
      */
-    public function shift(\DateTime $dateTime) {
+    public function shift(\DateTime $dateTime)
+    {
         $date = new Date($dateTime);
         if ($date->getDayOfMonth() <= $this->calendarDay) {
             $date->subtractMonth();

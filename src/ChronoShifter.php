@@ -24,7 +24,8 @@ class ChronoShifter implements \Iterator
      * @param Shifter $shifter
      * @param \DateTime $time
      */
-    public function __construct(Shifter $shifter, \DateTime $time = null) {
+    public function __construct(Shifter $shifter, \DateTime $time = null)
+    {
         $this->shifter = $shifter;
         $this->time = $time;
     }
@@ -32,34 +33,40 @@ class ChronoShifter implements \Iterator
     /**
      * @return \DateTime
      */
-    public function current() {
+    public function current()
+    {
         return $this->time;
     }
 
     /**
      * @return void
      */
-    public function next() {
+    public function next()
+    {
         $this->shifter->shift($this->time);
     }
 
     /**
      * @return int
      */
-    public function key() {
-        return (int) $this->time->format('U');
+    public function key()
+    {
+        return (int)$this->time->format('U');
     }
 
     /**
      * @return boolean The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
      */
-    public function valid() {
+    public function valid()
+    {
         return true;
     }
 
     /**
      * @return void
      */
-    public function rewind() { }
+    public function rewind()
+    {
+    }
 }

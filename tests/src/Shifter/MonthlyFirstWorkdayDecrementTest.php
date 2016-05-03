@@ -41,7 +41,8 @@ class MonthlyFirstWeekdayDecrementTest extends \PHPUnit_Framework_TestCase
      * @param string $start
      * @param string $expected
      */
-    public function testShift($start, $expected) {
+    public function testShift($start, $expected)
+    {
         $holidayProvider = $this
             ->getMockBuilder('COG\ChronoShifter\Date\HolidayProvider')
             ->setMethods(array('isHoliday'))
@@ -74,7 +75,8 @@ class MonthlyFirstWeekdayDecrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \LogicException
      */
-    public function testShifterWithoutHolidayProviderThrowsException() {
+    public function testShifterWithoutHolidayProviderThrowsException()
+    {
         $shifter = new MonthlyFirstWorkdayDecrement();
         $shifter->shift(new \DateTime('2015-01-01'));
     }
@@ -82,7 +84,8 @@ class MonthlyFirstWeekdayDecrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function shiftProvider() {
+    public function shiftProvider()
+    {
         return $this->fixture;
     }
 }

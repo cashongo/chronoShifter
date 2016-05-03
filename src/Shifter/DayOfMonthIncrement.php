@@ -15,7 +15,8 @@ class DayOfMonthIncrement extends DayOfMonthShifter
     /**
      * @param \DateTime $dateTime
      */
-    public function shift(\DateTime $dateTime) {
+    public function shift(\DateTime $dateTime)
+    {
         $date = new Date($dateTime);
         if ($date->getDayOfMonth() >= min($this->calendarDay, $date->getDaysInMonth())) {
             $date->addMonth();

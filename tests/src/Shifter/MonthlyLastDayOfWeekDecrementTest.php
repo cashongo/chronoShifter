@@ -37,7 +37,8 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
      * @param string $start
      * @param string $expected
      */
-    public function testShift($day, $start, $expected) {
+    public function testShift($day, $start, $expected)
+    {
         $shifter = new MonthlyLastDayOfWeekDecrement($day);
         $date = new \DateTime($start);
         $shifter->shift($date);
@@ -56,11 +57,13 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function shiftProvider() {
+    public function shiftProvider()
+    {
         return $this->fixture;
     }
 
-    public function testCastNumericStringToInteger() {
+    public function testCastNumericStringToInteger()
+    {
         $shifter = new MonthlyLastDayOfWeekDecrement('1');
         $this->assertInstanceOf(
             'COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekDecrement',
@@ -71,21 +74,24 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidArgumentWillThrowException() {
+    public function testInvalidArgumentWillThrowException()
+    {
         new MonthlyLastDayOfWeekDecrement('1.5');
     }
 
     /**
      * @expectedException \OutOfBoundsException
      */
-    public function testBelowOneDayWillThrowException() {
+    public function testBelowOneDayWillThrowException()
+    {
         new MonthlyLastDayOfWeekDecrement(0);
     }
 
     /**
      * @expectedException \OutOfBoundsException
      */
-    public function testAboveThirtyOneDaysWillThrowException() {
+    public function testAboveThirtyOneDaysWillThrowException()
+    {
         new MonthlyLastDayOfWeekDecrement(8);
     }
 }
