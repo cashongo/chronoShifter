@@ -1,8 +1,7 @@
 <?php
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package
- * @subpackage
+ * @package Shifter\Domain
  */
 
 namespace COG\ChronoShifter\Shifter;
@@ -11,12 +10,12 @@ use COG\ChronoShifter\Date\DateDecorator;
 use COG\ChronoShifter\Date\HolidayProvider;
 
 /**
- * Increments to next matching next first non-holiday weekday (M-F) of month
+ * Increments to next matching non-holiday weekday (M-F) of month
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Shifter\Domain
  */
-class MonthlyFirstWorkdayIncrement
+class MonthlyLastWorkdayIncrement
 {
     /**
      * @var \COG\ChronoShifter\Date\HolidayProvider
@@ -31,13 +30,12 @@ class MonthlyFirstWorkdayIncrement
         if (!$this->holidayProvider instanceof HolidayProvider) {
             throw new \LogicException('Holiday provider required');
         }
-
         $date = new DateDecorator($dateTime);
         $date->setHolidayProvider($this->holidayProvider);
         $dayOfMonth = $date->getDayOfMonth();
-        $date->toFirstWorkday();
+        $date->toLastWorkday();
         if ($date->getDayOfMonth() <= $dayOfMonth) {
-            $date->addMonth()->toFirstWorkday();
+            $date->addMonth()->toLastWorkday();
         }
     }
 

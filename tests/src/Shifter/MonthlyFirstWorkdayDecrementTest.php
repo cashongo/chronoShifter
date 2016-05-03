@@ -15,30 +15,35 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
      * @var array
      */
     private $fixture = array(
+
+        // Start at one second after first workday of month, shift to previous day
+
         array(
             '2015-06-02 00:00:00', // Starting time
-            '2015-05-01 00:00:00', // Expected time
-            [
-                '2015-06-01',      // Holidays
-                '2015-06-02'
-            ]
+            '2015-06-01 00:00:00', // Expected time
         ),
+
+        // Start at last second of first workday of month, shift back by a month
+
         array(
-            '2015-06-02 15:12:24', // Starting time
+            '2015-06-01 00:00:00', // Starting time
             '2015-05-01 00:00:00', // Expected time
-            [
-                '2015-06-01',      // Holidays
-                '2015-06-02'
-            ]
         ),
+
+        // Start on day after first workday of month, Monday 3rd
+
         array(
-            '2014-02-02 15:12:24', // Starting time
-            '2014-01-01 00:00:00', // Expected time
-            [
-                '2015-02-03',      // Holidays
-                '2015-02-04'
-            ]
+            '2015-08-04 15:12:24', // Starting time
+            '2015-08-03 00:00:00', // Expected time
         ),
+
+        // Start on first workday of month, Monday 3rd
+
+        array(
+            '2015-08-03 00:00:00', // Starting time
+            '2015-07-01 00:00:00', // Expected time
+        ),
+
         array(
             '2015-04-30 00:00:00', // Starting time
             '2015-04-03 00:00:00', // Expected time
@@ -47,6 +52,7 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
                 '2015-04-02'
             ]
         ),
+        
         array(
             '2015-11-30 00:00:00', // Starting time
             '2015-11-04 00:00:00', // Expected time
@@ -63,7 +69,7 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
      * @param string $expected
      * @param string[] $holidays
      */
-    public function testShift($start, $expected, $holidays)
+    public function testShift($start, $expected, $holidays = array())
     {
         $shifter = new MonthlyFirstWorkdayDecrement();
         $shifter->setHolidayProvider(new ArrayHolidayProvider($holidays));
@@ -75,7 +81,7 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
             $expected,
             $date->format('Y-m-d H:i:s'),
             sprintf(
-                'From %s to previous first weekday of month ',
+                'From %s to previous first workday of month ',
                 $start
             )
         );

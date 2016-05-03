@@ -10,7 +10,7 @@ use LogicException;
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Date\Domain
  */
-class Date
+class DateDecorator
 {
     const INTERVAL_ONE_MONTH = 'P1M';
 
@@ -42,10 +42,13 @@ class Date
 
     /**
      * @param \DateTime $date
+     * @return $this
      */
     public function setDateTime(\DateTime $date)
     {
         $this->date = $date->setTime(0, 0, 0);
+        
+        return $this;
     }
 
     /**
@@ -58,6 +61,7 @@ class Date
 
     /**
      * @param $day
+     * @return $this
      */
     public function setDayOfMonth($day)
     {
@@ -66,6 +70,8 @@ class Date
             $this->date->format('n'),
             $day
         );
+
+        return $this;
     }
 
     /**
@@ -100,28 +106,40 @@ class Date
 
     /**
      * @param HolidayProvider $provider
+     * @return $this
      */
     public function setHolidayProvider(HolidayProvider $provider)
     {
         $this->holiday = $provider;
+
+        return $this;
     }
 
     /**
      * @param $interval
+     * @return $this
      */
     public function addInterval($interval)
     {
         $this->date->add(new \DateInterval($interval));
+
+        return $this;
     }
 
     /**
      * @param $interval
+     * @return $this
      */
     public function subtractInterval($interval)
     {
         $this->date->sub(new \DateInterval($interval));
+
+        return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function addMonth()
     {
         $year = $this->date->format('Y');
@@ -133,8 +151,13 @@ class Date
         $day = $this->date->format('j');
         $this->date->setDate($year, $month, 1);
         $this->date->setDate($year, $month, min($day, $this->getDaysInMonth()));
+
+        return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function subtractMonth()
     {
         $year = $this->date->format('Y');
@@ -146,6 +169,8 @@ class Date
         $day = $this->date->format('j');
         $this->date->setDate($year, $month, 1);
         $this->date->setDate($year, $month, min($day, $this->getDaysInMonth()));
+
+        return $this;
     }
 
     /**
@@ -154,5 +179,43 @@ class Date
     public function getDaysInMonth()
     {
         return (int)$this->date->format('t');
+    }
+
+    /**
+     * @return $this
+     */
+    public function toFirstWorkday()
+    {
+        // Increment date until we have a banking day
+        for ($dayOfMonth = 1; $dayOfMonth < $this->date->format('t'); $dayOfMonth++) {
+            $this->setDayOfMonth($dayOfMonth);
+
+            $bankingDay = $this->isWeekday() && !$this->isHoliday();
+
+            if ($bankingDay) {
+                break;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function toLastWorkday()
+    {
+        // Decrement date until we have a banking day
+        for ($dayOfMonth = $this->date->format('t'); $dayOfMonth >= 1 ; $dayOfMonth--) {
+            $this->setDayOfMonth($dayOfMonth);
+
+            $bankingDay = $this->isWeekday() && !$this->isHoliday();
+
+            if ($bankingDay) {
+                break;
+            }
+        }
+
+        return $this;
     }
 }

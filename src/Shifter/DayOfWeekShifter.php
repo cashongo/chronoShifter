@@ -78,7 +78,7 @@ abstract class DayOfWeekShifter implements Shifter
         \DateTime $time,
         $dayOfWeek
     ) {
-        $daysInMonth = $time->format('t');
+        $daysInMonth = (int)$time->format('t');
         $dayOfWeekForLastCalendarDay =
             $this->getDayOfWeekForLastDayOfMonth($time);
 

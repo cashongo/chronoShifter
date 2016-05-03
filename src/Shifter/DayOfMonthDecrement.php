@@ -2,7 +2,7 @@
 
 namespace COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Date\Date;
+use COG\ChronoShifter\Date\DateDecorator;
 
 /**
  * Decrements the date to first day with specified day of month.
@@ -17,7 +17,7 @@ class DayOfMonthDecrement extends DayOfMonthShifter
      */
     public function shift(\DateTime $dateTime)
     {
-        $date = new Date($dateTime);
+        $date = new DateDecorator($dateTime);
         if ($date->getDayOfMonth() <= $this->calendarDay) {
             $date->subtractMonth();
         }
