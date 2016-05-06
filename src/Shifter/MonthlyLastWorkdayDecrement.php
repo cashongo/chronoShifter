@@ -10,12 +10,12 @@ use COG\ChronoShifter\Date\DateDecorator;
 use COG\ChronoShifter\Date\HolidayProvider;
 
 /**
- * Decrements to previous matching first non-holiday weekday (M-F) of month
+ * Decrements to previous matching non-holiday weekday (M-F) of month
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Shifter\Domain
  */
-class MonthlyFirstWorkdayDecrement implements Shifter
+class MonthlyLastWorkdayDecrement implements Shifter
 {
     /**
      * @var \COG\ChronoShifter\Date\HolidayProvider
@@ -41,9 +41,9 @@ class MonthlyFirstWorkdayDecrement implements Shifter
         $date = new DateDecorator($dateTime);
         $date->setHolidayProvider($this->holidayProvider);
         $dayOfMonth = $date->getDayOfMonth();
-        $date->toFirstWorkday();
+        $date->toLastWorkday();
         if ($date->getDayOfMonth() >= $dayOfMonth) {
-            $date->subtractMonth()->toFirstWorkday();
+            $date->subtractMonth()->toLastWorkday();
         }
     }
 }

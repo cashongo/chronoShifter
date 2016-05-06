@@ -7,8 +7,7 @@ namespace COG\ChronoShifter\Shifter;
  * the axis of time.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
 class IsochronicDecrement extends IsochronicShifter
 {
@@ -17,12 +16,13 @@ class IsochronicDecrement extends IsochronicShifter
     /**
      * @param \DateTime $date
      */
-    public function shift(\DateTime $date) {
+    public function shift(\DateTime $date)
+    {
         // Ignore time
         $date->setTime(0, 0, 0);
 
         // Current timestamp
-        $timestamp = (int) $date->format('U');
+        $timestamp = (int)$date->format('U');
 
         // Store current timezone offset
         $this->calculateInitialTimezoneOffset($date);
@@ -47,7 +47,8 @@ class IsochronicDecrement extends IsochronicShifter
     /**
      * @param \DateTime $time
      */
-    private function calculateInitialTimezoneOffset(\DateTime $time) {
+    private function calculateInitialTimezoneOffset(\DateTime $time)
+    {
         $this->initTzOffset = $time->getTimezone()->getOffset($time);
     }
 
@@ -55,7 +56,8 @@ class IsochronicDecrement extends IsochronicShifter
      * @param \DateTime $time
      * @return int
      */
-    private function getOffsetForTimezone(\DateTime $time) {
+    private function getOffsetForTimezone(\DateTime $time)
+    {
         $finalOffset = $time->getTimezone()->getOffset($time);
         return ($this->initTzOffset - $finalOffset);
     }

@@ -7,27 +7,41 @@ use COG\ChronoShifter\Shifter\IsochronicIncrement;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
+ * @package Test
  */
 class ChronoShifterTest extends \PHPUnit_Framework_TestCase
 {
-    public function testChronoShifterImplementsIterator() {
+    public function testChronoShifterImplementsIterator()
+    {
         $iterator = $this->createIsochronicIncrement();
         $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
 
         $this->assertInstanceOf('\Iterator', $shifter);
     }
 
-    public function testShifterIncrementsWithShifter() {
+    public function testShifterBeginsFromFirstMatch()
+    {
+        $iterator = $this->createIsochronicIncrement();
+
+        $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
+        $result = $shifter->current();
+
+        $this->assertEquals('2015-01-15', $result->format('Y-m-d'));
+    }
+
+    public function testShifterIncrementsWithShifter()
+    {
         $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
         $shifter->next();
         $result = $shifter->current();
 
-        $this->assertEquals('2015-01-15', $result->format('Y-m-d'));
+        $this->assertEquals('2015-01-29', $result->format('Y-m-d'));
     }
 
-    public function testShifterKeyIsTimestamp() {
+    public function testShifterKeyIsTimestamp()
+    {
         $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
@@ -37,24 +51,30 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
         $date->setTimezone(new \DateTimeZone('Europe/Helsinki'));
         $date->setDate(2015, 01, 15)->setTime(0, 0, 0);
 
-        $this->assertEquals($date->getTimestamp(), $shifter->key());
+        $this->assertInternalType('integer', $shifter->key());
     }
 
-    public function testShifterPositionValidForOldDates() {
+    public function testShifterPositionValidForOldDates()
+    {
         $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('1988-09-01'));
         $this->assertTrue($shifter->valid());
     }
 
-    public function testShifterPositionValidForFutureDates() {
+    public function testShifterPositionValidForFutureDates()
+    {
         $iterator = $this->createIsochronicIncrement();
 
         $shifter = new ChronoShifter($iterator, new \DateTime('2100-09-01'));
         $this->assertTrue($shifter->valid());
     }
 
-    private function createIsochronicIncrement() {
+    /**
+     * @return IsochronicIncrement
+     */
+    private function createIsochronicIncrement()
+    {
         return new IsochronicIncrement(
             14,
             new \DateTime('2015-01-01')

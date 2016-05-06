@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <style type="text/css">
+        body {
+            font-family: arial, serif;
+            font-size: 12px;
+        }
+        .date {
+            float: left;
+            padding: 10px;
+            border: 1px solid #fff;
+            border-top: 1px solid #f8f8f8;
+            border-bottom: 1px solid #f8f8f8;
+            text-align: center;
+            height: 14px;
+            width: 14px;
+        }
+        .week {
+            clear: both;
+        }
+        .active {
+            background-color: #5bc0de;
+        }
+
+        .first {
+            background-color: #4cae4c;
+        }
+
+        .holiday {
+            border: 1px solid #FF8000;
+        }
+
+        .current-week {
+            border: 1px solid #fff;
+            color: #ccc;
+        }
+
+        .current-month {
+            border: 1px solid #fff;
+            color: #ccc;
+        }
+
+        .current-year {
+            border: 1px solid #fff;
+            color: #ccc;
+        }
+
+        .examples div {
+            padding: 10px;
+        }
+    </style>
+    <title>MonthlyLastWorkdayDecrement</title>
+</head>
+<body>
+    <div class="examples">
+        <div class="first">Begin</div>
+        <div class="active">Match</div>
+        <div class="holiday">Holiday</div>
+    </div>
+
+    <hr />
+    <pre>new MonthlyLastWorkdayDecrement($holidayProvider)</pre>
+    <hr />
+
+    <div>
+        <div class="week">
+            <div class="date current-week">&nbsp;</div>
+            <div class="date">M</div>
+            <div class="date">Tu</div>
+            <div class="date">W</div>
+            <div class="date">Th</div>
+            <div class="date">F</div>
+            <div class="date">Sa</div>
+            <div class="date">Su</div>
+        </div>
+                    <div class="week">
+                                <div class="date current-week">05</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date">28</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date">30</div>
+                                                        <div class="date active">31</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                <div class="date current-month">02</div>
+                                                <div class="date current-year">2014</div>
+                            </div>
+                    <div class="week">
+                                <div class="date current-week">06</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">07</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">08</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">09</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                        <div class="date">26</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date active">28</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                <div class="date current-month">03</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">10</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">11</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">12</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">13</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                        <div class="date">26</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date">28</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date">30</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">14</div>
+                                                        <div class="date active">31</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                <div class="date current-month">04</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">15</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">16</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date holiday">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">17</div>
+                                                        <div class="date holiday">21</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                        <div class="date">26</div>
+                                                        <div class="date">27</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">18</div>
+                                                        <div class="date">28</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date active">30</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                <div class="date current-month">05</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">19</div>
+                                                        <div class="date holiday">5</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">20</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">21</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">22</div>
+                                                        <div class="date holiday">26</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date">28</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date active">30</div>
+                                                        <div class="date">31</div>
+                                                        <div class="date">1</div>
+                                                <div class="date current-month">06</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">23</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">24</div>
+                                                        <div class="date">9</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">25</div>
+                                                        <div class="date">16</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                        <div class="date">22</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">26</div>
+                                                        <div class="date">23</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                        <div class="date">26</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date">28</div>
+                                                        <div class="date">29</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">27</div>
+                                                        <div class="date active">30</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                <div class="date current-month">07</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">28</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">29</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">30</div>
+                                                        <div class="date">21</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                        <div class="date">26</div>
+                                                        <div class="date">27</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">31</div>
+                                                        <div class="date">28</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date">30</div>
+                                                        <div class="date active">31</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                <div class="date current-month">08</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">32</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                        <div class="date">10</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">33</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                        <div class="date">17</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">34</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                        <div class="date">24</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">35</div>
+                                                        <div class="date holiday">25</div>
+                                                        <div class="date">26</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date">28</div>
+                                                        <div class="date active">29</div>
+                                                        <div class="date">30</div>
+                                                        <div class="date">31</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">36</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                <div class="date current-month">09</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">37</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">38</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">39</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                        <div class="date">26</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date">28</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">40</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date active">30</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                <div class="date current-month">10</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">41</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">42</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">43</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                        <div class="date">26</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">44</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date">28</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date">30</div>
+                                                        <div class="date active">31</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                <div class="date current-month">11</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">45</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">46</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">47</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">48</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date">25</div>
+                                                        <div class="date">26</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date active">28</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date">30</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">49</div>
+                                                        <div class="date">1</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                        <div class="date">5</div>
+                                                        <div class="date">6</div>
+                                                        <div class="date">7</div>
+                                                <div class="date current-month">12</div>
+                                            </div>
+                    <div class="week">
+                                <div class="date current-week">50</div>
+                                                        <div class="date">8</div>
+                                                        <div class="date">9</div>
+                                                        <div class="date">10</div>
+                                                        <div class="date">11</div>
+                                                        <div class="date">12</div>
+                                                        <div class="date">13</div>
+                                                        <div class="date">14</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">51</div>
+                                                        <div class="date">15</div>
+                                                        <div class="date">16</div>
+                                                        <div class="date">17</div>
+                                                        <div class="date">18</div>
+                                                        <div class="date">19</div>
+                                                        <div class="date">20</div>
+                                                        <div class="date">21</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">52</div>
+                                                        <div class="date">22</div>
+                                                        <div class="date">23</div>
+                                                        <div class="date">24</div>
+                                                        <div class="date holiday">25</div>
+                                                        <div class="date holiday">26</div>
+                                                        <div class="date">27</div>
+                                                        <div class="date">28</div>
+                                                            </div>
+                    <div class="week">
+                                <div class="date current-week">01</div>
+                                                        <div class="date">29</div>
+                                                        <div class="date">30</div>
+                                                        <div class="date first">31</div>
+                                                        <div class="date holiday">1</div>
+                                                        <div class="date">2</div>
+                                                        <div class="date">3</div>
+                                                        <div class="date">4</div>
+                                                <div class="date current-month">01</div>
+                                                <div class="date current-year">2015</div>
+                            </div>
+            </div>
+</body>
+

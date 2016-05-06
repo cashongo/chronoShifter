@@ -6,8 +6,7 @@ namespace COG\ChronoShifter\Shifter;
  * Based class for day of month shifters.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
 abstract class DayOfMonthShifter implements Shifter
 {
@@ -19,7 +18,8 @@ abstract class DayOfMonthShifter implements Shifter
     /**
      * @param int $calendarDay 1-31
      */
-    public function __construct($calendarDay) {
+    public function __construct($calendarDay)
+    {
         if (false === filter_var($calendarDay, FILTER_VALIDATE_INT)) {
             throw new \InvalidArgumentException('Integer required');
         }
@@ -32,7 +32,7 @@ abstract class DayOfMonthShifter implements Shifter
             throw new \OutOfBoundsException('Day of month greater than 31');
         }
 
-        $this->calendarDay = (int) $calendarDay;
+        $this->calendarDay = (int)$calendarDay;
     }
 
     /**
@@ -44,15 +44,17 @@ abstract class DayOfMonthShifter implements Shifter
      * @param \DateTime $time
      * @return mixed
      */
-    protected function getDayLimitedToDaysInMonth(\DateTime $time) {
-        return min($this->calendarDay, (int) $time->format('t'));
+    protected function getDayLimitedToDaysInMonth(\DateTime $time)
+    {
+        return min($this->calendarDay, (int)$time->format('t'));
     }
 
     /**
      * @param \DateTime $time
      * @param $day
      */
-    protected function setCalendarDay(\DateTime $time, $day) {
+    protected function setCalendarDay(\DateTime $time, $day)
+    {
         $time->setDate($time->format('Y'), $time->format('n'), $day);
     }
 }

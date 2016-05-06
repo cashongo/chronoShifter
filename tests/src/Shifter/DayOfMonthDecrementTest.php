@@ -6,8 +6,7 @@ use COG\ChronoShifter\Shifter\DayOfMonthDecrement;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package Tests\COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Test
  */
 class DayOfMonthDecrementTest extends \PHPUnit_Framework_TestCase
 {
@@ -58,7 +57,8 @@ class DayOfMonthDecrementTest extends \PHPUnit_Framework_TestCase
      * @param string $start
      * @param string $expected
      */
-    public function testShift($day, $start, $expected) {
+    public function testShift($day, $start, $expected)
+    {
         $shifter = new DayOfMonthDecrement($day);
         $date = new \DateTime($start);
         $shifter->shift($date);
@@ -77,11 +77,13 @@ class DayOfMonthDecrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function shiftProvider() {
+    public function shiftProvider()
+    {
         return $this->fixture;
     }
 
-    public function testCastNumericStringToInteger() {
+    public function testCastNumericStringToInteger()
+    {
         $shifter = new DayOfMonthDecrement('1');
         $this->assertInstanceOf(
             'COG\ChronoShifter\Shifter\DayOfMonthDecrement',
@@ -92,21 +94,24 @@ class DayOfMonthDecrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidArgumentWillThrowException() {
+    public function testInvalidArgumentWillThrowException()
+    {
         new DayOfMonthDecrement('1.5');
     }
 
     /**
      * @expectedException \OutOfBoundsException
      */
-    public function testBelowOneDayWillThrowException() {
+    public function testBelowOneDayWillThrowException()
+    {
         new DayOfMonthDecrement(0);
     }
 
     /**
      * @expectedException \OutOfBoundsException
      */
-    public function testAboveThirtyOneDaysWillThrowException() {
+    public function testAboveThirtyOneDaysWillThrowException()
+    {
         new DayOfMonthDecrement(32);
     }
 }

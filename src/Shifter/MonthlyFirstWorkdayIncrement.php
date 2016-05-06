@@ -7,67 +7,45 @@
 
 namespace COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Date\Date;
+use COG\ChronoShifter\Date\DateDecorator;
 use COG\ChronoShifter\Date\HolidayProvider;
 
 /**
  * Increments to next matching next first non-holiday weekday (M-F) of month
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
-class MonthlyFirstWorkdayIncrement {
+class MonthlyFirstWorkdayIncrement implements Shifter
+{
     /**
      * @var \COG\ChronoShifter\Date\HolidayProvider
      */
     private $holidayProvider;
 
     /**
-     * @param \DateTime $dateTime
-     */
-    public function shift(\DateTime $dateTime) {
-        if(!$this->holidayProvider instanceof HolidayProvider) {
-            throw new \LogicException('Holiday provider required');
-        }
-
-        $date = new Date($dateTime);
-        $date->setHolidayProvider($this->holidayProvider);
-        $dayOfMonth = (int)$dateTime->format('j');
-
-        $this->toFirstWorkday($date);
-        if ($date->getDayOfMonth() <= $dayOfMonth) {
-            $date->addInterval(Date::INTERVAL_ONE_MONTH);
-            $this->toFirstWorkday($date);
-        }
-    }
-
-    /**
-     * @return HolidayProvider
-     */
-    public function getHolidayProvider() {
-        return $this->holidayProvider;
-    }
-
-    /**
      * @param HolidayProvider $provider
      */
-    public function setHolidayProvider(HolidayProvider $provider) {
+    public function __construct(HolidayProvider $provider)
+    {
         $this->holidayProvider = $provider;
     }
 
     /**
-     * @param Date $date
+     * @param \DateTime $dateTime
      */
-    private function toFirstWorkday(Date $date) {
-        // Increment date until we have a banking day
-        for ($dayOfMonth = 1; $dayOfMonth < 30; $dayOfMonth++) {
-            $date->setDayOfMonth($dayOfMonth);
+    public function shift(\DateTime $dateTime)
+    {
+        if (!$this->holidayProvider instanceof HolidayProvider) {
+            throw new \LogicException('Holiday provider required');
+        }
 
-            $bankingDay = $date->isWeekday() && !$date->isHoliday();
-            if ($bankingDay) {
-                break;
-            }
+        $date = new DateDecorator($dateTime);
+        $date->setHolidayProvider($this->holidayProvider);
+        $dayOfMonth = $date->getDayOfMonth();
+        $date->toFirstWorkday();
+        if ($date->getDayOfMonth() <= $dayOfMonth) {
+            $date->addMonth()->toFirstWorkday();
         }
     }
 }

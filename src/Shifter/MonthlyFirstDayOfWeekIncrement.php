@@ -7,21 +7,21 @@ namespace COG\ChronoShifter\Shifter;
  * the month.
  *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Domain
  */
 class MonthlyFirstDayOfWeekIncrement extends DayOfWeekShifter
 {
     /**
      * @param \DateTime $date
      */
-    public function shift(\DateTime $date) {
+    public function shift(\DateTime $date)
+    {
         $date->setTime(0, 0, 0);
 
         $firstCalendarDayWithDayOfWeek =
             $this->getFirstCalendarDayWithDayOfWeek($date, $this->dayOfWeek);
 
-        if ((int) $date->format('j') >= $firstCalendarDayWithDayOfWeek) {
+        if ((int)$date->format('j') >= $firstCalendarDayWithDayOfWeek) {
             $date->add(new \DateInterval('P1M'));
         }
 

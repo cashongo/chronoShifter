@@ -14,6 +14,21 @@ Simple tools for traversal of Gregorian calendar.
 * `Day of Week`: Monday - Sunday.
 * `Workday`: A day of week that is not weekend or holiday.
 
+## Examples
+
+* [Day of Month, Increment](docs/DayOfMonthIncrement.html)
+* [Day of Month, Decrement](docs/DayOfMonthDecrement.html)
+* [Isochronic, Increment](docs/DayOfMonthIncrement.html)
+* [Isochronic, Decrement](docs/DayOfMonthDecrement.html)
+* [Monthly First Day of Week, Increment](docs/MonthlyFirstDayOfWeekIncrement.html)
+* [Monthly First Day of Week, Decrement](docs/MonthlyFirstDayOfWeekDecrement.html)
+* [Monthly Last Day of Week, Increment](docs/MonthlyLastDayOfWeekIncrement.html)
+* [Monthly Last Day of Week, Decrement](docs/MonthlyLastDayOfWeekDecrement.html)
+* [Monthly First Workday, Increment](docs/MonthlyFirstWorkdayIncrement.html)
+* [Monthly First Workday Decrement](docs/MonthlyFirstWorkdayDecrement.html)
+* [Monthly Last Workday, Increment](docs/MonthlyLastWorkdayIncrement.html)
+* [Monthly Last Workday Decrement](docs/MonthlyLastWorkdayDecrement.html)
+
 ### Shifters
 
 * **Day of Month**

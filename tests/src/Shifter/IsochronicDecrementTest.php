@@ -6,8 +6,7 @@ use COG\ChronoShifter\Shifter\IsochronicDecrement;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package Tests\COG\ChronoShifter
- * @subpackage Shifter
+ * @package Shifter\Test
  */
 class IsochronicDecrementTest extends \PHPUnit_Framework_TestCase
 {
@@ -86,7 +85,8 @@ class IsochronicDecrementTest extends \PHPUnit_Framework_TestCase
      * @param string $start
      * @param string $expected
      */
-    public function testShiftDown($reference, $start, $expected) {
+    public function testShiftDown($reference, $start, $expected)
+    {
         $shifter = new IsochronicDecrement(28, new \DateTime($reference));
         $date = new \DateTime($start);
         $shifter->shift($date);
@@ -105,7 +105,8 @@ class IsochronicDecrementTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function shiftProvider() {
+    public function shiftProvider()
+    {
         return $this->fixture;
     }
 }
