@@ -59,32 +59,29 @@ abstract class DayOfWeekShifter implements Shifter
      * @param $dayOfWeek
      * @return int
      */
-    protected function getFirstCalendarDayWithDayOfWeek(
+    protected function getFirstDayOfMonthHavingDayOfWeek(
         \DateTime $time,
         $dayOfWeek
     ) {
-        $dayOfWeekForFirstCalendarDay =
-            $this->getDayOfWeekForFirstDayOfMonth($time);
+        $dayOfWeekOfFirstDayOfMonth = $this->getDayOfWeekForFirstDayOfMonth($time);
 
-        return (int)((7 - $dayOfWeekForFirstCalendarDay + $dayOfWeek) % 7) + 1;
+        return (int)((7 - $dayOfWeekOfFirstDayOfMonth + $dayOfWeek) % 7) + 1;
     }
 
     /**
      * @param \DateTime $time
-     * @param $dayOfWeek
+     * @param int $dayOfWeek
      * @return int
      */
-    protected function getLastCalendarDayWithDayOfWeek(
+    protected function getLastDayOfMonthHavingDayOfWeek(
         \DateTime $time,
         $dayOfWeek
     ) {
         $daysInMonth = (int)$time->format('t');
-        $dayOfWeekForLastCalendarDay =
-            $this->getDayOfWeekForLastDayOfMonth($time);
+        $dayOfWeekOfLastDayOfMonth = $this->getDayOfWeekOfLastDayOfMonth($time);
+        $offset = ($dayOfWeekOfLastDayOfMonth - $dayOfWeek + 7) % 7;
 
-        $offset = (int)((7 - $dayOfWeekForLastCalendarDay + $dayOfWeek) % 7);
-
-        return $daysInMonth - 7 + $offset;
+        return $daysInMonth - $offset;
     }
 
     /**
@@ -100,7 +97,7 @@ abstract class DayOfWeekShifter implements Shifter
      * @param \DateTime $time
      * @return int
      */
-    protected function getDayOfWeekForLastDayOfMonth(\DateTime $time)
+    protected function getDayOfWeekOfLastDayOfMonth(\DateTime $time)
     {
         return (int)date('N', $this->getTimestampForLastDayOfMonth($time));
     }

@@ -14,20 +14,31 @@ class MonthlyFirstDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
      * @var array
      */
     private $fixture = array(
+
         array(
-            3, // Specific day
+            3, // Wednesday
             '2015-07-01 00:00:00', // Starting time
             '2015-06-03 00:00:00'  // Expected time
         ),
+
         array(
-            3, // Specific day
+            3, // Wednesday
             '2015-07-01 15:12:24', // Starting time
             '2015-06-03 00:00:00'  // Expected time
         ),
+
         array(
-            4, // Specific day
+            4, // Thursday
             '2015-07-04 15:12:24', // Starting time
             '2015-07-02 00:00:00'  // Expected time
+        ),
+
+        // Day of week is also first day of month
+
+        array(
+            7, // Sunday
+            '2015-02-15 00:00:00', // Starting time
+            '2015-02-01 00:00:00'
         )
     );
 

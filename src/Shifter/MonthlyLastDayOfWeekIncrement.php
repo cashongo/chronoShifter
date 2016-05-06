@@ -19,7 +19,7 @@ class MonthlyLastDayOfWeekIncrement extends DayOfWeekShifter
         $date->setTime(0, 0, 0);
 
         $lastCalendarDayWithDayOfWeek =
-            $this->getLastCalendarDayWithDayOfWeek($date, $this->dayOfWeek);
+            $this->getLastDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek);
 
         if ((int)$date->format('j') >= $lastCalendarDayWithDayOfWeek) {
             $date->add(new \DateInterval('P1M'));
@@ -27,7 +27,7 @@ class MonthlyLastDayOfWeekIncrement extends DayOfWeekShifter
 
         $this->setCalendarDay(
             $date,
-            $this->getLastCalendarDayWithDayOfWeek($date, $this->dayOfWeek)
+            $this->getLastDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek)
         );
     }
 }

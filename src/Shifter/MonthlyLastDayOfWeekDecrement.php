@@ -18,16 +18,16 @@ class MonthlyLastDayOfWeekDecrement extends DayOfWeekShifter
     {
         $date->setTime(0, 0, 0);
 
-        $firstCalendarDayWithDayOfWeek =
-            $this->getLastCalendarDayWithDayOfWeek($date, $this->dayOfWeek);
+        $lastCalendarDayWithDayOfWeek =
+            $this->getLastDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek);
 
-        if ((int)$date->format('j') <= $firstCalendarDayWithDayOfWeek) {
+        if ((int)$date->format('j') <= $lastCalendarDayWithDayOfWeek) {
             $date->sub(new \DateInterval('P1M'));
         }
 
         $this->setCalendarDay(
             $date,
-            $this->getLastCalendarDayWithDayOfWeek($date, $this->dayOfWeek)
+            $this->getLastDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek)
         );
     }
 }

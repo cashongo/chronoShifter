@@ -19,7 +19,7 @@ class MonthlyFirstDayOfWeekIncrement extends DayOfWeekShifter
         $date->setTime(0, 0, 0);
 
         $firstCalendarDayWithDayOfWeek =
-            $this->getFirstCalendarDayWithDayOfWeek($date, $this->dayOfWeek);
+            $this->getFirstDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek);
 
         if ((int)$date->format('j') >= $firstCalendarDayWithDayOfWeek) {
             $date->add(new \DateInterval('P1M'));
@@ -27,7 +27,7 @@ class MonthlyFirstDayOfWeekIncrement extends DayOfWeekShifter
 
         $this->setCalendarDay(
             $date,
-            $this->getFirstCalendarDayWithDayOfWeek($date, $this->dayOfWeek)
+            $this->getFirstDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek)
         );
     }
 }
