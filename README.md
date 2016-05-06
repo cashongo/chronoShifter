@@ -16,18 +16,18 @@ Simple tools for traversal of Gregorian calendar.
 
 ## Examples
 
-* [Day of Month, Increment](docs/DayOfMonthIncrement.html)
-* [Day of Month, Decrement](docs/DayOfMonthDecrement.html)
-* [Isochronic, Increment](docs/DayOfMonthIncrement.html)
-* [Isochronic, Decrement](docs/DayOfMonthDecrement.html)
-* [Monthly First Day of Week, Increment](docs/MonthlyFirstDayOfWeekIncrement.html)
-* [Monthly First Day of Week, Decrement](docs/MonthlyFirstDayOfWeekDecrement.html)
-* [Monthly Last Day of Week, Increment](docs/MonthlyLastDayOfWeekIncrement.html)
-* [Monthly Last Day of Week, Decrement](docs/MonthlyLastDayOfWeekDecrement.html)
-* [Monthly First Workday, Increment](docs/MonthlyFirstWorkdayIncrement.html)
-* [Monthly First Workday Decrement](docs/MonthlyFirstWorkdayDecrement.html)
-* [Monthly Last Workday, Increment](docs/MonthlyLastWorkdayIncrement.html)
-* [Monthly Last Workday Decrement](docs/MonthlyLastWorkdayDecrement.html)
+* [Day of Month, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/DayOfMonthIncrement.html)
+* [Day of Month, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/DayOfMonthDecrement.html)
+* [Isochronic, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/DayOfMonthIncrement.html)
+* [Isochronic, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/DayOfMonthDecrement.html)
+* [Monthly First Day of Week, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyFirstDayOfWeekIncrement.html)
+* [Monthly First Day of Week, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyFirstDayOfWeekDecrement.html)
+* [Monthly Last Day of Week, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyLastDayOfWeekIncrement.html)
+* [Monthly Last Day of Week, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyLastDayOfWeekDecrement.html)
+* [Monthly First Workday, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyFirstWorkdayIncrement.html)
+* [Monthly First Workday Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyFirstWorkdayDecrement.html)
+* [Monthly Last Workday, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyLastWorkdayIncrement.html)
+* [Monthly Last Workday Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyLastWorkdayDecrement.html)
 
 ### Shifters
 
