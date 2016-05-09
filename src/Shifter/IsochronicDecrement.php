@@ -11,24 +11,30 @@ namespace COG\ChronoShifter\Shifter;
  */
 class IsochronicDecrement extends IsochronicShifter
 {
+    /**
+     * @var int
+     */
     private $initTzOffset;
 
     /**
-     * @param \DateTime $date
+     * @param string $date
+     * @return string
      */
-    public function shift(\DateTime $date)
+    public function shift($date)
     {
+        $dateTime = new \DateTime($date);
+
         // Ignore time
-        $date->setTime(0, 0, 0);
+        $dateTime->setTime(0, 0, 0);
 
         // Current timestamp
-        $timestamp = (int)$date->format('U');
+        $timestamp = (int)$dateTime->format('U');
 
         // Store current timezone offset
-        $this->calculateInitialTimezoneOffset($date);
+        $this->calculateInitialTimezoneOffset($dateTime);
 
         // Calculate distance to previous isochronic timestamp
-        $isochronicOffset = $this->getIsochronicOffset($date);
+        $isochronicOffset = $this->getIsochronicOffset($dateTime);
         $decrementBy = $isochronicOffset - $this->referenceOffset;
         if ($this->referenceOffset >= $isochronicOffset) {
             $decrementBy += $this->interval;
@@ -36,12 +42,14 @@ class IsochronicDecrement extends IsochronicShifter
 
         // Calculate new timestamp
         $newTimestamp = $timestamp - $decrementBy;
-        $date->setTimestamp($newTimestamp);
+        $dateTime->setTimestamp($newTimestamp);
 
         // Adjust result for time zone differences
-        if ($tzOffset = $this->getOffsetForTimezone($date)) {
-            $date->setTimestamp($newTimestamp + $tzOffset);
+        if ($tzOffset = $this->getOffsetForTimezone($dateTime)) {
+            $dateTime->setTimestamp($newTimestamp + $tzOffset);
         }
+
+        return $dateTime->format('Y-m-d');
     }
 
     /**

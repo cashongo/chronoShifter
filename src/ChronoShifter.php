@@ -16,24 +16,23 @@ class ChronoShifter implements \Iterator
     private $shifter;
 
     /**
-     * @var \DateTime
+     * @var string
      */
-    private $originalTime;
+    private $date;
 
     /**
      * @var \DateTime
      */
-    private $time;
+    private $startDate;
 
     /**
      * @param Shifter $shifter
-     * @param \DateTime $time
+     * @param string $date
      */
-    public function __construct(Shifter $shifter, \DateTime $time = null)
+    public function __construct(Shifter $shifter, $date = null)
     {
         $this->shifter = $shifter;
-        $this->originalTime = clone $time;
-        $this->time = $time;
+        $this->date = $this->startDate = $date;
 
         $this->rewind();
     }
@@ -43,7 +42,7 @@ class ChronoShifter implements \Iterator
      */
     public function current()
     {
-        return $this->time;
+        return $this->date;
     }
 
     /**
@@ -51,7 +50,7 @@ class ChronoShifter implements \Iterator
      */
     public function next()
     {
-        $this->shifter->shift($this->time);
+        $this->date = $this->shifter->shift($this->date);
     }
 
     /**
@@ -59,7 +58,7 @@ class ChronoShifter implements \Iterator
      */
     public function key()
     {
-        return (int)$this->time->format('U');
+        return strtotime($this->date);
     }
 
     /**
@@ -76,7 +75,7 @@ class ChronoShifter implements \Iterator
      */
     public function rewind()
     {
-        $this->time->setTimestamp($this->originalTime->getTimestamp());
+        $this->date = $this->startDate;
         $this->next();
     }
 }

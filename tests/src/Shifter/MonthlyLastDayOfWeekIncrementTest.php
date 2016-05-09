@@ -17,34 +17,34 @@ class MonthlyLastDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
 
         array(
             1, // Monday
-            '2015-06-02 00:00:00', // Starting time
-            '2015-06-29 00:00:00'  // Expected time
+            '2015-06-02', // Starting time
+            '2015-06-29'  // Expected time
         ),
 
         array(
             1, // Monday
             '2015-06-02 15:12:24', // Starting time
-            '2015-06-29 00:00:00'  // Expected time
+            '2015-06-29'  // Expected time
         ),
 
         array(
             7, // Sunday
             '2015-06-29 15:12:24', // Starting time
-            '2015-07-26 00:00:00'  // Expected time
+            '2015-07-26'  // Expected time
         ),
 
         array(
             5, // Friday
-            '2015-06-15 00:00:00', // Starting time
-            '2015-06-26 00:00:00'  // Expected time
+            '2015-06-15', // Starting time
+            '2015-06-26'  // Expected time
         ),
 
         // Day of week is also last day of month
 
         array(
             2, // Tuesday
-            '2016-05-06 00:00:00', // Starting time
-            '2016-05-31 00:00:00'
+            '2016-05-06', // Starting time
+            '2016-05-31'
         )
 
     );
@@ -58,12 +58,11 @@ class MonthlyLastDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
     public function testShift($day, $start, $expected)
     {
         $shifter = new MonthlyLastDayOfWeekIncrement($day);
-        $date = new \DateTime($start);
-        $shifter->shift($date);
+        $result = $shifter->shift($start);
 
         $this->assertEquals(
             $expected,
-            $date->format('Y-m-d H:i:s'),
+            $result,
             sprintf(
                 'From %s to next last week day of month = %d',
                 $start,

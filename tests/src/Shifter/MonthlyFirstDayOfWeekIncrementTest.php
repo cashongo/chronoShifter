@@ -17,34 +17,34 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
 
         array(
             1, // Monday
-            '2015-06-02 00:00:00', // Starting time
-            '2015-07-06 00:00:00'  // Expected time
+            '2015-06-02', // Starting time
+            '2015-07-06'  // Expected time
         ),
 
         array(
             1, // Monday
             '2015-06-02 15:12:24', // Starting time
-            '2015-07-06 00:00:00'  // Expected time
+            '2015-07-06'  // Expected time
         ),
 
         array(
             7, // Sunday
             '2015-06-02 15:12:24', // Starting time
-            '2015-06-07 00:00:00'  // Expected time
+            '2015-06-07'  // Expected time
         ),
 
         array(
             5, // Friday
-            '2015-06-15 00:00:00', // Starting time
-            '2015-07-03 00:00:00'  // Expected time
+            '2015-06-15', // Starting time
+            '2015-07-03'  // Expected time
         ),
 
         // Day of week is also the first day of month
 
         array(
             7, // Sunday
-            '2015-01-15 00:00:00', // Starting time
-            '2015-02-01 00:00:00'
+            '2015-01-15', // Starting time
+            '2015-02-01'
         )
     );
 
@@ -57,12 +57,11 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
     public function testShift($day, $start, $expected)
     {
         $shifter = new MonthlyFirstDayOfWeekIncrement($day);
-        $date = new \DateTime($start);
-        $shifter->shift($date);
+        $result = $shifter->shift($start);
 
         $this->assertEquals(
             $expected,
-            $date->format('Y-m-d H:i:s'),
+            $result,
             sprintf(
                 'From %s to next first week day of month = %d',
                 $start,

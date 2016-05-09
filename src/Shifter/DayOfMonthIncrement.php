@@ -13,14 +13,17 @@ use COG\ChronoShifter\Date\DateDecorator;
 class DayOfMonthIncrement extends DayOfMonthShifter
 {
     /**
-     * @param \DateTime $dateTime
+     * @param string $date
+     * @return string
      */
-    public function shift(\DateTime $dateTime)
+    public function shift($date)
     {
-        $date = new DateDecorator($dateTime);
-        if ($date->getDayOfMonth() >= min($this->calendarDay, $date->getDaysInMonth())) {
-            $date->addMonth();
+        $dateDecorator = new DateDecorator(new \DateTime($date));
+        if ($dateDecorator->getDayOfMonth() >= min($this->calendarDay, $dateDecorator->getDaysInMonth())) {
+            $dateDecorator->addMonth();
         }
-        $date->setDayOfMonth($this->getDayLimitedToDaysInMonth($date->getDateTime()));
+        $dateDecorator->setDayOfMonth($this->getDayLimitedToDaysInMonth($dateDecorator->getDateTime()));
+
+        return $dateDecorator->getDateTime()->format('Y-m-d');
     }
 }

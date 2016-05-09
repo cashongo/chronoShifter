@@ -31,19 +31,23 @@ class MonthlyFirstWorkdayDecrement implements Shifter
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param string $date
+     * @return string
      */
-    public function shift(\DateTime $dateTime)
+    public function shift($date)
     {
         if (!$this->holidayProvider instanceof HolidayProvider) {
             throw new \LogicException('Holiday provider required');
         }
-        $date = new DateDecorator($dateTime);
-        $date->setHolidayProvider($this->holidayProvider);
-        $dayOfMonth = $date->getDayOfMonth();
-        $date->toFirstWorkday();
-        if ($date->getDayOfMonth() >= $dayOfMonth) {
-            $date->subtractMonth()->toFirstWorkday();
+
+        $dateDecorator = new DateDecorator(new \DateTime($date));
+        $dateDecorator->setHolidayProvider($this->holidayProvider);
+        $dayOfMonth = $dateDecorator->getDayOfMonth();
+        $dateDecorator->toFirstWorkday();
+        if ($dateDecorator->getDayOfMonth() >= $dayOfMonth) {
+            $dateDecorator->subtractMonth()->toFirstWorkday();
         }
+
+        return $dateDecorator->getDateTime()->format('Y-m-d');
     }
 }

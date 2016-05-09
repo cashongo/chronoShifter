@@ -17,28 +17,28 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
 
         array(
             3, // Wednesday
-            '2015-07-01 00:00:00', // Starting time
-            '2015-06-24 00:00:00'  // Expected time
+            '2015-07-01', // Starting time
+            '2015-06-24'  // Expected time
         ),
 
         array(
             3, // Wednesday
             '2015-07-01 15:12:24', // Starting time
-            '2015-06-24 00:00:00'  // Expected time
+            '2015-06-24'  // Expected time
         ),
 
         array(
             4, // Thursday
             '2015-06-25 15:12:24', // Starting time
-            '2015-05-28 00:00:00'  // Expected time
+            '2015-05-28'  // Expected time
         ),
 
         // Day of week is also last day of month
 
         array(
             2, // Tuesday
-            '2016-06-05 00:00:00', // Starting time
-            '2016-05-31 00:00:00'  // Expected time
+            '2016-06-05', // Starting time
+            '2016-05-31'  // Expected time
         )
 
     );
@@ -52,12 +52,11 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
     public function testShift($day, $start, $expected)
     {
         $shifter = new MonthlyLastDayOfWeekDecrement($day);
-        $date = new \DateTime($start);
-        $shifter->shift($date);
+        $result = $shifter->shift($start);
 
         $this->assertEquals(
             $expected,
-            $date->format('Y-m-d H:i:s'),
+            $result,
             sprintf(
                 'From %s to previous last week day of month = %d',
                 $start,

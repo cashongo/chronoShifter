@@ -19,34 +19,34 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
         // Start at one second after first workday of month, shift to previous day
 
         array(
-            '2015-06-02 00:00:00', // Starting time
-            '2015-06-01 00:00:00', // Expected time
+            '2015-06-02', // Starting time
+            '2015-06-01', // Expected time
         ),
 
         // Start at last second of first workday of month, shift back by a month
 
         array(
-            '2015-06-01 00:00:00', // Starting time
-            '2015-05-01 00:00:00', // Expected time
+            '2015-06-01', // Starting time
+            '2015-05-01', // Expected time
         ),
 
         // Start on day after first workday of month, Monday 3rd
 
         array(
             '2015-08-04 15:12:24', // Starting time
-            '2015-08-03 00:00:00', // Expected time
+            '2015-08-03', // Expected time
         ),
 
         // Start on first workday of month, Monday 3rd
 
         array(
-            '2015-08-03 00:00:00', // Starting time
-            '2015-07-01 00:00:00', // Expected time
+            '2015-08-03', // Starting time
+            '2015-07-01', // Expected time
         ),
 
         array(
-            '2015-04-30 00:00:00', // Starting time
-            '2015-04-03 00:00:00', // Expected time
+            '2015-04-30', // Starting time
+            '2015-04-03', // Expected time
             [
                 '2015-04-01',      // Holidays
                 '2015-04-02'
@@ -54,8 +54,8 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
         ),
         
         array(
-            '2015-11-30 00:00:00', // Starting time
-            '2015-11-04 00:00:00', // Expected time
+            '2015-11-30', // Starting time
+            '2015-11-04', // Expected time
             [
                 '2015-11-02',      // Holidays
                 '2015-11-03'
@@ -73,12 +73,11 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
     {
         $shifter = new MonthlyFirstWorkdayDecrement(new ArrayHolidayProvider($holidays));
 
-        $date = new \DateTime($start);
-        $shifter->shift($date);
+        $result = $shifter->shift($start);
 
         $this->assertEquals(
             $expected,
-            $date->format('Y-m-d H:i:s'),
+            $result,
             sprintf(
                 'From %s to previous first workday of month ',
                 $start

@@ -12,22 +12,25 @@ namespace COG\ChronoShifter\Shifter;
 class MonthlyLastDayOfWeekDecrement extends DayOfWeekShifter
 {
     /**
-     * @param \DateTime $date
+     * @param string $date
+     * @return string
      */
-    public function shift(\DateTime $date)
+    public function shift($date)
     {
-        $date->setTime(0, 0, 0);
+        $dateTime = new \DateTime($date);
 
         $lastCalendarDayWithDayOfWeek =
-            $this->getLastDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek);
+            $this->getLastDayOfMonthHavingDayOfWeek($dateTime, $this->dayOfWeek);
 
-        if ((int)$date->format('j') <= $lastCalendarDayWithDayOfWeek) {
-            $date->sub(new \DateInterval('P1M'));
+        if ((int)$dateTime->format('j') <= $lastCalendarDayWithDayOfWeek) {
+            $dateTime->sub(new \DateInterval('P1M'));
         }
 
         $this->setCalendarDay(
-            $date,
-            $this->getLastDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek)
+            $dateTime,
+            $this->getLastDayOfMonthHavingDayOfWeek($dateTime, $this->dayOfWeek)
         );
+
+        return $dateTime->format('Y-m-d');
     }
 }

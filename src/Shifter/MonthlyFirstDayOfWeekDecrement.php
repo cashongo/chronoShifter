@@ -12,22 +12,25 @@ namespace COG\ChronoShifter\Shifter;
 class MonthlyFirstDayOfWeekDecrement extends DayOfWeekShifter
 {
     /**
-     * @param \DateTime $date
+     * @param string $date
+     * @return string
      */
-    public function shift(\DateTime $date)
+    public function shift($date)
     {
-        $date->setTime(0, 0, 0);
+        $dateTime = new \DateTime($date);
 
         $firstCalendarDayWithDayOfWeek =
-            $this->getFirstDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek);
+            $this->getFirstDayOfMonthHavingDayOfWeek($dateTime, $this->dayOfWeek);
 
-        if ((int)$date->format('j') <= $firstCalendarDayWithDayOfWeek) {
-            $date->sub(new \DateInterval('P1M'));
+        if ((int)$dateTime->format('j') <= $firstCalendarDayWithDayOfWeek) {
+            $dateTime->sub(new \DateInterval('P1M'));
         }
 
         $this->setCalendarDay(
-            $date,
-            $this->getFirstDayOfMonthHavingDayOfWeek($date, $this->dayOfWeek)
+            $dateTime,
+            $this->getFirstDayOfMonthHavingDayOfWeek($dateTime, $this->dayOfWeek)
         );
+
+        return $dateTime->format('Y-m-d');
     }
 }

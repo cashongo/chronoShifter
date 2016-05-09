@@ -50,9 +50,10 @@ abstract class DayOfWeekShifter implements Shifter
     }
 
     /**
-     * @param \DateTime $date
+     * @param string $date
+     * @return string
      */
-    abstract public function shift(\DateTime $date);
+    abstract public function shift($date);
 
     /**
      * @param \DateTime $time

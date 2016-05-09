@@ -26,18 +26,19 @@ abstract class IsochronicShifter implements Shifter
 
     /**
      * @param int $days
-     * @param \DateTime $referenceDate
+     * @param string $referenceDate
      */
-    public function __construct($days, \DateTime $referenceDate)
+    public function __construct($days, $referenceDate)
     {
         $this->interval = $days * self::SECONDS_IN_DAY;
-        $this->referenceOffset = $this->getIsochronicOffset($referenceDate);
+        $this->referenceOffset = $this->getIsochronicOffset(new \DateTime($referenceDate));
     }
 
     /**
-     * @param \DateTime $date
+     * @param string $date
+     * @return string
      */
-    abstract public function shift(\DateTime $date);
+    abstract public function shift($date);
 
     /**
      * @param \DateTime $time
@@ -62,6 +63,7 @@ abstract class IsochronicShifter implements Shifter
             $time->format('n'),
             $time->format('j')
         );
+
         return (int)$result->format('U');
     }
 }

@@ -11,7 +11,8 @@ namespace COG\ChronoShifter\Shifter;
 interface Shifter
 {
     /**
-     * @param \DateTime $date
+     * @param string $date
+     * @return string
      */
-    public function shift(\DateTime $date);
+    public function shift($date);
 }

@@ -14,7 +14,7 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
     public function testChronoShifterImplementsIterator()
     {
         $iterator = $this->createIsochronicIncrement();
-        $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
+        $shifter = new ChronoShifter($iterator, '2015-01-03');
 
         $this->assertInstanceOf('\Iterator', $shifter);
     }
@@ -23,28 +23,28 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
     {
         $iterator = $this->createIsochronicIncrement();
 
-        $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
+        $shifter = new ChronoShifter($iterator, '2015-01-03');
         $result = $shifter->current();
 
-        $this->assertEquals('2015-01-15', $result->format('Y-m-d'));
+        $this->assertEquals('2015-01-15', $result);
     }
 
     public function testShifterIncrementsWithShifter()
     {
         $iterator = $this->createIsochronicIncrement();
 
-        $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
+        $shifter = new ChronoShifter($iterator, '2015-01-03');
         $shifter->next();
         $result = $shifter->current();
 
-        $this->assertEquals('2015-01-29', $result->format('Y-m-d'));
+        $this->assertEquals('2015-01-29', $result);
     }
 
     public function testShifterKeyIsTimestamp()
     {
         $iterator = $this->createIsochronicIncrement();
 
-        $shifter = new ChronoShifter($iterator, new \DateTime('2015-01-03'));
+        $shifter = new ChronoShifter($iterator, '2015-01-03');
         $shifter->next();
 
         $date = new \DateTime();
@@ -58,7 +58,7 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
     {
         $iterator = $this->createIsochronicIncrement();
 
-        $shifter = new ChronoShifter($iterator, new \DateTime('1988-09-01'));
+        $shifter = new ChronoShifter($iterator, '1988-09-01');
         $this->assertTrue($shifter->valid());
     }
 
@@ -66,7 +66,7 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
     {
         $iterator = $this->createIsochronicIncrement();
 
-        $shifter = new ChronoShifter($iterator, new \DateTime('2100-09-01'));
+        $shifter = new ChronoShifter($iterator, '2100-09-01');
         $this->assertTrue($shifter->valid());
     }
 
@@ -75,9 +75,6 @@ class ChronoShifterTest extends \PHPUnit_Framework_TestCase
      */
     private function createIsochronicIncrement()
     {
-        return new IsochronicIncrement(
-            14,
-            new \DateTime('2015-01-01')
-        );
+        return new IsochronicIncrement(14, '2015-01-01');
     }
 }

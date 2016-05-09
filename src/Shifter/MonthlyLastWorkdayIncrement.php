@@ -31,19 +31,22 @@ class MonthlyLastWorkdayIncrement implements Shifter
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param string $date
+     * @return string
      */
-    public function shift(\DateTime $dateTime)
+    public function shift($date)
     {
         if (!$this->holidayProvider instanceof HolidayProvider) {
             throw new \LogicException('Holiday provider required');
         }
-        $date = new DateDecorator($dateTime);
-        $date->setHolidayProvider($this->holidayProvider);
-        $dayOfMonth = $date->getDayOfMonth();
-        $date->toLastWorkday();
-        if ($date->getDayOfMonth() <= $dayOfMonth) {
-            $date->addMonth()->toLastWorkday();
+        $dateDecorator = new DateDecorator(new \DateTime($date));
+        $dateDecorator->setHolidayProvider($this->holidayProvider);
+        $dayOfMonth = $dateDecorator->getDayOfMonth();
+        $dateDecorator->toLastWorkday();
+        if ($dateDecorator->getDayOfMonth() <= $dayOfMonth) {
+            $dateDecorator->addMonth()->toLastWorkday();
         }
+
+        return $dateDecorator->getDateTime()->format('Y-m-d');
     }
 }

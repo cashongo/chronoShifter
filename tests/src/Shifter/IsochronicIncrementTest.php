@@ -17,63 +17,63 @@ class IsochronicIncrementTest extends \PHPUnit_Framework_TestCase
 
         // Shift up by four weeks
         array(
-            '2015-06-02 00:00:00', // Day of reference
-            '2015-06-02 00:00:00', // Starting time
-            '2015-06-30 00:00:00'  // Expected time
+            '2015-06-02', // Day of reference
+            '2015-06-02', // Starting time
+            '2015-06-30'  // Expected time
         ),
 
         // Discard time of the day
         array(
-            '2015-06-02 00:00:00', // Day of reference
+            '2015-06-02', // Day of reference
             '2015-06-02 15:12:24', // Starting time
-            '2015-06-30 00:00:00'  // Expected time
+            '2015-06-30'  // Expected time
         ),
 
         // Reference date in past
         array(
             '2015-06-10 15:12:24', // Day of reference
-            '2015-06-29 00:00:00', // Starting time
-            '2015-07-08 00:00:00'  // Expected time
+            '2015-06-29', // Starting time
+            '2015-07-08'  // Expected time
         ),
 
         // Reference date in future
         array(
-            '2015-07-01 00:00:00', // Day of reference
-            '2015-06-15 00:00:00', // Starting time
-            '2015-07-01 00:00:00'  // Expected time
+            '2015-07-01', // Day of reference
+            '2015-06-15', // Starting time
+            '2015-07-01'  // Expected time
         ),
 
         // Reference date on the next day
         array(
-            '2015-07-02 00:00:00', // Day of reference
-            '2015-06-15 00:00:00', // Starting time
-            '2015-07-02 00:00:00'  // Expected time
+            '2015-07-02', // Day of reference
+            '2015-06-15', // Starting time
+            '2015-07-02'  // Expected time
         ),
 
         // February with 28 days
         array(
-            '2015-02-01 00:00:00', // Day of reference
-            '2015-02-15 00:00:00', // Starting time
-            '2015-03-01 00:00:00'  // Expected time
+            '2015-02-01', // Day of reference
+            '2015-02-15', // Starting time
+            '2015-03-01'  // Expected time
         ),
 
         // February with 29 days
         array(
-            '2016-02-01 00:00:00', // Day of reference
-            '2016-02-15 00:00:00', // Starting time
-            '2016-02-29 00:00:00'  // Expected time
+            '2016-02-01', // Day of reference
+            '2016-02-15', // Starting time
+            '2016-02-29'  // Expected time
         ),
         // Increment with DST difference
         array(
             '2015-04-05 10:26:20', // Day of reference
-            '2015-03-04 00:00:00', // Starting time
-            '2015-03-08 00:00:00'  // Expected time
+            '2015-03-04', // Starting time
+            '2015-03-08'  // Expected time
         ),
         // Increment with DST difference
         array(
             '2015-04-05 10:26:20', // Day of reference
-            '2015-10-15 00:00:00', // Starting time
-            '2015-10-18 00:00:00'  // Expected time
+            '2015-10-15', // Starting time
+            '2015-10-18'  // Expected time
         )
     );
 
@@ -85,13 +85,12 @@ class IsochronicIncrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShift($reference, $start, $expected)
     {
-        $shifter = new IsochronicIncrement(28, new \DateTime($reference));
-        $date = new \DateTime($start);
-        $shifter->shift($date);
+        $shifter = new IsochronicIncrement(28, $reference);
+        $result = $shifter->shift($start);
 
         $this->assertEquals(
             $expected,
-            $date->format('Y-m-d H:i:s'),
+            $result,
             sprintf(
                 'From %s to next four weeks referencing %s',
                 $start,
