@@ -52,7 +52,7 @@
             padding: 10px;
         }
     </style>
-    <title>MonthlyLastWorkdayIncrement</title>
+    <title></title>
 </head>
 <body>
     <div class="examples">
@@ -62,7 +62,16 @@
     </div>
 
     <hr />
-    <pre>MonthlyLastWorkdayIncrement($holidayProvider)</pre>
+    <pre>
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Evaluator\Workday;
+use COG\ChronoShifter\HolidayProvider\ArrayHolidayProvider;
+use COG\ChronoShifter\Selector\LastOf;
+use COG\ChronoShifter\Direction\Increasing;
+use COG\ChronoShifter\ChronoShifter;
+
+new ChronoShifter(new Month('2015-01-01'), new LastOf(new Increasing(), new Workday(new ArrayHolidayProvider($holidays))));
+</pre>
     <hr />
 
     <div>

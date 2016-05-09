@@ -52,7 +52,7 @@
             padding: 10px;
         }
     </style>
-    <title>DayOfMonthIncrement</title>
+    <title></title>
 </head>
 <body>
     <div class="examples">
@@ -62,7 +62,15 @@
     </div>
 
     <hr />
-    <pre>new DayOfMonthIncrement(1)</pre>
+    <pre>
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Selector\Specific;
+use COG\ChronoShifter\Direction\Increasing;
+use COG\ChronoShifter\ChronoShifter;
+
+
+new ChronoShifter(new Month('2015-01-01'), new Specific(new Increasing(), 1));
+</pre>
     <hr />
 
     <div>

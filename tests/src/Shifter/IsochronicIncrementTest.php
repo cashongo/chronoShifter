@@ -2,7 +2,10 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Shifter\IsochronicIncrement;
+use COG\ChronoShifter\Direction\Increasing;
+use COG\ChronoShifter\Period\IsoChronic;
+use COG\ChronoShifter\Selector\Specific;
+use COG\ChronoShifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
@@ -85,7 +88,7 @@ class IsochronicIncrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShift($reference, $start, $expected)
     {
-        $shifter = new IsochronicIncrement(28, $reference);
+        $shifter = new ChronoShifter(new Isochronic($start, $reference, 28), new Specific(new Increasing(), 1));
         $result = $shifter->shift($start);
 
         $this->assertEquals(

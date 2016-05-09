@@ -2,7 +2,11 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekDecrement;
+use COG\ChronoShifter\Direction\Decreasing;
+use COG\ChronoShifter\Evaluator\DayOfWeek;
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Selector\LastOf;
+use COG\ChronoShifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
@@ -51,7 +55,7 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShift($day, $start, $expected)
     {
-        $shifter = new MonthlyLastDayOfWeekDecrement($day);
+        $shifter = new ChronoShifter(new Month($start), new LastOf(new Decreasing(), new DayOfWeek($day)));
         $result = $shifter->shift($start);
 
         $this->assertEquals(
@@ -71,38 +75,5 @@ class MonthlyLastDayOfWeekDecrementTest extends \PHPUnit_Framework_TestCase
     public function shiftProvider()
     {
         return $this->fixture;
-    }
-
-    public function testCastNumericStringToInteger()
-    {
-        $shifter = new MonthlyLastDayOfWeekDecrement('1');
-        $this->assertInstanceOf(
-            'COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekDecrement',
-            $shifter
-        );
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidArgumentWillThrowException()
-    {
-        new MonthlyLastDayOfWeekDecrement('1.5');
-    }
-
-    /**
-     * @expectedException \OutOfBoundsException
-     */
-    public function testBelowOneDayWillThrowException()
-    {
-        new MonthlyLastDayOfWeekDecrement(0);
-    }
-
-    /**
-     * @expectedException \OutOfBoundsException
-     */
-    public function testAboveThirtyOneDaysWillThrowException()
-    {
-        new MonthlyLastDayOfWeekDecrement(8);
     }
 }

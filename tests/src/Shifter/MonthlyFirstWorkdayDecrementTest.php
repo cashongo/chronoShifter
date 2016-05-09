@@ -2,8 +2,12 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Date\ArrayHolidayProvider;
-use COG\ChronoShifter\Shifter\MonthlyFirstWorkdayDecrement;
+use COG\ChronoShifter\HolidayProvider\ArrayHolidayProvider;
+use COG\ChronoShifter\Direction\Decreasing;
+use COG\ChronoShifter\Evaluator\Workday;
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Selector\FirstOf;
+use COG\ChronoShifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
@@ -71,8 +75,7 @@ class MonthlyFirstWorkdayDecrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShift($start, $expected, $holidays = array())
     {
-        $shifter = new MonthlyFirstWorkdayDecrement(new ArrayHolidayProvider($holidays));
-
+        $shifter = new ChronoShifter(new Month($start), new FirstOf(new Decreasing(), new Workday(new ArrayHolidayProvider($holidays))));
         $result = $shifter->shift($start);
 
         $this->assertEquals(

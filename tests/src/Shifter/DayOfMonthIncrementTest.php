@@ -2,7 +2,10 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Shifter\DayOfMonthIncrement;
+use COG\ChronoShifter\Direction\Increasing;
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Selector\Specific;
+use COG\ChronoShifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
@@ -64,8 +67,9 @@ class DayOfMonthIncrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShift($day, $start, $expected)
     {
-        $shifter = new DayOfMonthIncrement($day);
+        $shifter = new ChronoShifter(new Month($start), new Specific(new Increasing(), $day));
         $result = $shifter->shift($start);
+
         $this->assertEquals(
             $expected,
             $result,
@@ -83,38 +87,5 @@ class DayOfMonthIncrementTest extends \PHPUnit_Framework_TestCase
     public function shiftProvider()
     {
         return $this->fixture;
-    }
-
-    public function testCastNumericStringToInteger()
-    {
-        $shifter = new DayOfMonthIncrement('1');
-        $this->assertInstanceOf(
-            'COG\ChronoShifter\Shifter\DayOfMonthIncrement',
-            $shifter
-        );
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidArgumentWillThrowException()
-    {
-        new DayOfMonthIncrement('1.5');
-    }
-
-    /**
-     * @expectedException \OutOfBoundsException
-     */
-    public function testBelowOneDayWillThrowException()
-    {
-        new DayOfMonthIncrement(0);
-    }
-
-    /**
-     * @expectedException \OutOfBoundsException
-     */
-    public function testAboveThirtyOneDaysWillThrowException()
-    {
-        new DayOfMonthIncrement(32);
     }
 }

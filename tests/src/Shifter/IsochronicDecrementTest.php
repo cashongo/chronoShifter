@@ -2,7 +2,10 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Shifter\IsochronicDecrement;
+use COG\ChronoShifter\Direction\Decreasing;
+use COG\ChronoShifter\Period\IsoChronic;
+use COG\ChronoShifter\Selector\Specific;
+use COG\ChronoShifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
@@ -87,7 +90,7 @@ class IsochronicDecrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShiftDown($reference, $start, $expected)
     {
-        $shifter = new IsochronicDecrement(28, $reference);
+        $shifter = new ChronoShifter(new Isochronic($start, $reference, 28), new Specific(new Decreasing(), 1));
         $result = $shifter->shift($start);
 
         $this->assertEquals(

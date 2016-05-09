@@ -52,7 +52,7 @@
             padding: 10px;
         }
     </style>
-    <title>MonthlyLastDayOfWeekIncrement</title>
+    <title></title>
 </head>
 <body>
     <div class="examples">
@@ -62,7 +62,15 @@
     </div>
 
     <hr />
-    <pre>new MonthlyLastDayOfWeekIncrement(1)</pre>
+    <pre>
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Evaluator\DayOfWeek;
+use COG\ChronoShifter\Selector\LastOf;
+use COG\ChronoShifter\Direction\Increasing;
+use COG\ChronoShifter\ChronoShifter;
+
+new ChronoShifter(new Month('2015-01-01'), new LastOf(new Increasing(), new DayOfWeek(1)));
+</pre>
     <hr />
 
     <div>
@@ -437,7 +445,7 @@
                                                             </div>
                     <div class="week">
                                 <div class="date current-week">40</div>
-                                                        <div class="date">28</div>
+                                                        <div class="date active">28</div>
                                                         <div class="date">29</div>
                                                         <div class="date">30</div>
                                                         <div class="date">1</div>
@@ -579,47 +587,6 @@
                                                         <div class="date">3</div>
                                                 <div class="date current-month">01</div>
                                             </div>
-                    <div class="week">
-                                <div class="date current-week">01</div>
-                                                        <div class="date">4</div>
-                                                        <div class="date">5</div>
-                                                        <div class="date">6</div>
-                                                        <div class="date">7</div>
-                                                        <div class="date">8</div>
-                                                        <div class="date">9</div>
-                                                        <div class="date">10</div>
-                                                                <div class="date current-year">2016</div>
-                            </div>
-                    <div class="week">
-                                <div class="date current-week">02</div>
-                                                        <div class="date">11</div>
-                                                        <div class="date">12</div>
-                                                        <div class="date">13</div>
-                                                        <div class="date">14</div>
-                                                        <div class="date">15</div>
-                                                        <div class="date">16</div>
-                                                        <div class="date">17</div>
-                                                            </div>
-                    <div class="week">
-                                <div class="date current-week">03</div>
-                                                        <div class="date">18</div>
-                                                        <div class="date">19</div>
-                                                        <div class="date">20</div>
-                                                        <div class="date">21</div>
-                                                        <div class="date">22</div>
-                                                        <div class="date">23</div>
-                                                        <div class="date">24</div>
-                                                            </div>
-                    <div class="week">
-                                <div class="date current-week">04</div>
-                                                        <div class="date active">25</div>
-                                                        <div class="date">26</div>
-                                                        <div class="date">27</div>
-                                                        <div class="date">28</div>
-                                                        <div class="date">29</div>
-                                                        <div class="date">30</div>
-                                                        <div class="date">31</div>
-                                                            </div>
             </div>
 </body>
 

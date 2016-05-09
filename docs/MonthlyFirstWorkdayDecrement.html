@@ -52,7 +52,7 @@
             padding: 10px;
         }
     </style>
-    <title>MonthlyFirstWorkdayDecrement</title>
+    <title></title>
 </head>
 <body>
     <div class="examples">
@@ -62,7 +62,16 @@
     </div>
 
     <hr />
-    <pre>new MonthlyFirstWorkdayDecrement($holidayProvider)</pre>
+    <pre>
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Evaluator\Workday;
+use COG\ChronoShifter\HolidayProvider\ArrayHolidayProvider;
+use COG\ChronoShifter\Selector\FirstOf;
+use COG\ChronoShifter\Direction\Decreasing;
+use COG\ChronoShifter\ChronoShifter;
+
+new ChronoShifter(new Month('2015-01-01'), new FirstOf(new Decreasing(), new Workday(new ArrayHolidayProvider($holidays))));
+</pre>
     <hr />
 
     <div>
