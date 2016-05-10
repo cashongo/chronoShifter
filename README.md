@@ -72,8 +72,8 @@ AND/OR/NOT to support combining the evaluators however necessary:
 
 * `DayOfWeek($dayOfWeek : int)`
 * `Holiday($holidayProvider : HolidayProvider);`
-* `Weekday()``
-* `Weekend()``
+* `Weekday();`
+* `Weekend();`
 * `Workday($holidayProvider : HolidayProvider);`
 * `LogicalAnd($first : Evaluator, $second : Evaluator);`
 * `LogicalOr($first : Evaluator, $second : Evaluator);`
@@ -83,17 +83,17 @@ AND/OR/NOT to support combining the evaluators however necessary:
 
 Selectors use a period, direction and evaluator to find a match.
 
-* `FirstOf($direction : Direction, $evaluator : Evaluator)`
-* `LastOf($direction : Direction, $evaluator : Evaluator)`
-* `Specific($direction : Direction, $number : int)`
+* `FirstOf($direction : Direction, $evaluator : Evaluator);`
+* `LastOf($direction : Direction, $evaluator : Evaluator);`
+* `Specific($direction : Direction, $number : int);`
 
 ### Directions
 
 Directions specify how to traverse between periods. There are two supplied with
 ChronoShifter: increment to future or decrement to past.
 
-* `Increasing()`
-* `Decreasing()`
+* `Increasing();`
+* `Decreasing();`
 
 ### HolidayProvider
 

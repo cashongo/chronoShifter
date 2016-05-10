@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\COG\ChronoShifter\Period;
+namespace Tests\COG\ChronoShifter\Selector;
 
 use COG\ChronoShifter\Direction\Decreasing;
 use COG\ChronoShifter\Direction\Direction;
@@ -52,6 +52,7 @@ class SpecificTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
+     * @uses COG\ChronoShifter\Direction\Direction
      */
     public function testInvalidArgumentWillThrowException()
     {
@@ -60,7 +61,7 @@ class SpecificTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \OutOfBoundsException
-     * @uses Direction
+     * @uses COG\ChronoShifter\Direction\Direction
      */
     public function testBelowOneDayWillThrowException()
     {

@@ -26,6 +26,7 @@ class ShifterShifterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @uses COG\ChronoShifter\Shifter\Shifter
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
     private function mockShifter()

@@ -11,6 +11,7 @@ use COG\ChronoShifter\Evaluator\Evaluator;
 abstract class LogicalEvaluatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @uses COG\ChronoShifter\Evaluator\Evaluator
      * @return Evaluator
      */
     protected function createMock()

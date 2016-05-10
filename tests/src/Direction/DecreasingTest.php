@@ -10,6 +10,9 @@ use COG\ChronoShifter\Direction\Decreasing;
  */
 class DecrementTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @uses COG\ChronoShifter\Period\Period
+     */
     public function testNextMovesToPreviousPeriod()
     {
         $periodMock = $this

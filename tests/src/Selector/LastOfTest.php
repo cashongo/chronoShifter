@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\COG\ChronoShifter\Period;
+namespace Tests\COG\ChronoShifter\Selector;
 
 use COG\ChronoShifter\HolidayProvider\ArrayHolidayProvider;
 use COG\ChronoShifter\Direction\Decreasing;
