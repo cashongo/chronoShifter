@@ -3,15 +3,14 @@
 namespace COG\ChronoShifter\Shifter;
 
 /**
- * Increment or decrement time
- *
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Shifter\Domain
  */
 interface Shifter
 {
     /**
-     * @param \DateTime $date
+     * @param string $date
+     * @return string
      */
-    public function shift(\DateTime $date);
+    public function shift($date);
 }

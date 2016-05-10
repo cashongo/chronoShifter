@@ -2,216 +2,125 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/cashongo/chronoShifter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/cashongo/chronoShifter/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cashongo/chronoShifter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cashongo/chronoShifter/?branch=master)
 
-# chronoShifter
+# ChronoShifter
 
-## PHP iterators for moving around in time
+## PHP framework for navigating through time using the Gregorian calendar.
 
-Simple tools for traversal of Gregorian calendar.
-
-## Glossary
-
-* `Day of Month`: Numerical day of month 1-31, upper limit depends on given month.
-* `Day of Week`: Monday - Sunday.
-* `Workday`: A day of week that is not weekend or holiday.
-
-## Examples
-
-* [Day of Month, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/DayOfMonthIncrement.html)
-* [Day of Month, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/DayOfMonthDecrement.html)
-* [Isochronic, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/IsochronicIncrement.html)
-* [Isochronic, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/IsochronicDecrement.html)
-* [Monthly First Day of Week, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyFirstDayOfWeekIncrement.html)
-* [Monthly First Day of Week, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyFirstDayOfWeekDecrement.html)
-* [Monthly Last Day of Week, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyLastDayOfWeekIncrement.html)
-* [Monthly Last Day of Week, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyLastDayOfWeekDecrement.html)
-* [Monthly First Workday, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyFirstWorkdayIncrement.html)
-* [Monthly First Workday, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyFirstWorkdayDecrement.html)
-* [Monthly Last Workday, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyLastWorkdayIncrement.html)
-* [Monthly Last Workday, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/docs/MonthlyLastWorkdayDecrement.html)
+## Contents
 
 ### Shifters
 
-* **Day of Month**
-    * Check if calendar day is greater than specific date.
-        * Increment month if it is greater than specific date.
-    * Check if given day exists in current month.
-        * If it does, set the day to specific day of month.
-        * Otherwise set day to last day of given month.
-* **Monthly first day of week**
-    * Check if calendar day is greater than first day of week for current month.
-        * Increment month if it is.
-    * Set calendar day.
-* **Monthly last day of week**
-    * Increment the month.
-    * Decrement day by 1 until desired weekday.
-* **Isochronic**
-    * Increment by specified number of days.
+Shifters transform time.
 
+```
+use COG\ChronoShifter\Direction\Increasing;
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Selector\Specific;
+use COG\ChronoShifter\Shifter\ChronoShifter;
 
-## Day of month shifters
+$shifter = new ChronoShifter(new Month('2015-01-05'), new Specific(new Increasing(), 5));
+$shifter->next('2015-01-05'); // '2015-02-05'
+```
 
-Supports iterating over specific days of month.
+Shifters are designed to be composable and extendible. The number of combinations they can be used in is high, and it
+is fairly simple to create new shifters, directions, periods, and selectors.
 
-### Available shifters
+There are more shifters available to combine or alter the results.
 
-* `COG\ChronoShifter\Shifter\DayOfMonthDecrement::__construct($day : int)`
-* `COG\ChronoShifter\Shifter\DayOfMonthIncrement::__construct($day : int)`
+### Periods
 
-### Example
+Periods encapsulate the logic how to traverse between periods. Periods are commonly used for answering questions such as
+"When is the first Friday of this month?"
 
-    use COG\ChronoShifter\ChronoShifter;
-    use COG\ChronoShifter\Shifter\DayOfMonthIncrement;
+```
+use COG\ChronoShifter\Period\Month;
 
-    $time = new \DateTime('2015-04-07 10:26:20');
-    $shifter = new DayOfMonthIncrement(14);
-    $iterator = new \LimitIterator(new ChronoShifter($shifter, $time), 1, 10);
-    foreach($iterator as $time) {
-        echo $time->format("Y-m-d H:i:s\n");
-    }
+$month = new Month('2015-01-12');
+$month->getStartDate(); // '2015-12-01'
+$month->getEndDate(); // '2015-12-31'
+$month->next();
+$month->getStartDate(); // '2015-01-01'
+$month->getEndDate(); // '2015-01-31'
+```
 
-    // Outputs
+IsoChronic period represents an evenly divided period of time.
 
-    2015-04-14 00:00:00
-    2015-05-14 00:00:00
-    2015-06-14 00:00:00
-    2015-07-14 00:00:00
-    2015-08-14 00:00:00
-    2015-09-14 00:00:00
-    2015-10-14 00:00:00
-    2015-11-14 00:00:00
-    2015-12-14 00:00:00
-    2016-01-14 00:00:00
+```
+use COG\ChronoShifter\Period\IsoChronic;
 
-### Notes
+$iso = new IsoChronic('2015-01-11', '2015-01-11', 7);
+$iso->getStartDate(); // '2015-01-11'
+$iso->getEndDate(); // '2015-01-17'
+$iso->next();
+$iso->getStartDate(); // '2015-01-18'
+$iso->getEndDate(); // '2015-01-24'
+```
 
-It is possible that the `Day of Month` is greater than number of
-days in a given month. In this case the month will not be skipped, instead
-last day of month will be used.
+### Evaluators
 
-## Monthly first day of week shifters
+Evaluators encapsulate facts about dates.
 
-### Available shifters
+```
+use COG\ChronoShifter\Evaluator\DayOfWeek;
 
-* `COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekDecrement::__construct($weekDay:int)`
-* `COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekIncrement::__construct($weekDay:int)`
+$evaluator = new DayOfWeek(DayOfWeek::MONDAY);
+$evaluator->is('2015-01-24'); // False
+```
 
-### Example
+There are 5 evalutors for basic facts about dates, and logical evaluators
+AND/OR/NOT to support combining the evaluators however necessary:
 
-    use COG\ChronoShifter\ChronoShifter;
-    use COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekDecrement;
+* `DayOfWeek($dayOfWeek : int)`
+* `Holiday($holidayProvider : HolidayProvider);`
+* `Weekday();`
+* `Weekend();`
+* `Workday($holidayProvider : HolidayProvider);`
+* `LogicalAnd($first : Evaluator, $second : Evaluator);`
+* `LogicalOr($first : Evaluator, $second : Evaluator);`
+* `LogicalNot($evaluator : Evaluator);`
 
-    $time = new \DateTime('2015-04-05 10:26:20');
-    $shifter = new MonthlyFirstDayOfWeekDecrement(MonthlyFirstDayOfWeekDecrement::MONDAY);
-    $iterator = new \LimitIterator(new ChronoShifter($shifter, $time), 1, 10);
-    foreach($iterator as $time) {
-        echo $time->format("Y-m-d H:i:s\n");
-    }
+### Selectors
 
-    // Outputs
+Selectors use a period, direction and evaluator to find a match.
 
-    2015-03-02 00:00:00
-    2015-02-02 00:00:00
-    2015-01-05 00:00:00
-    2014-12-01 00:00:00
-    2014-11-03 00:00:00
-    2014-10-06 00:00:00
-    2014-09-01 00:00:00
-    2014-08-04 00:00:00
-    2014-07-07 00:00:00
-    2014-06-02 00:00:00
+* `FirstOf($direction : Direction, $evaluator : Evaluator);`
+* `LastOf($direction : Direction, $evaluator : Evaluator);`
+* `Specific($direction : Direction, $number : int);`
 
+### Directions
 
-## Monthly first workday shifters
+Directions specify how to traverse between periods. There are two supplied with
+ChronoShifter: increment to future or decrement to past.
 
-* `COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekDecrement::__construct()`
-* `COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekIncrement::__construct()`
+* `Increasing();`
+* `Decreasing();`
 
-### Note
+### HolidayProvider
 
-The logic to determine holidays is not part of this library. This library
-provides an interface `COG\ChronoShifter\Date\HolidayProvider` which has
-one method to specify whether the requested date is a holiday.
+There are many ways how to represent holidays, and ChronoShifter provides
+an interface, so you can plug in your application's holiday logic.
 
-### Example
+```
+use COG\ChronoShifter\HolidayProvider\ArrayHolidayProvider;
 
-    use COG\ChronoShifter\ChronoShifter;
-    use COG\ChronoShifter\Date\HolidayProvider;
-    use My\Own\SwedishHolidayProvider;
+$holidayProvider = new ArrayHolidayProvider(array('2015-01-01'));
+$holidayProvider->isHoliday('2014-12-31'); // False
+$holidayProvider->isHoliday('2015-01-01'); // True
+```
 
-    $holidayProvider = new SwedishHolidayProvider();
+## Examples
 
-    $time = new \DateTime('2015-12-23 10:26:20');
-    $shifter = new MonthlyFirstWorkdayIncrement();
-    $shifter->setHolidayProvider($holidayProvider);
-    $shifter->shift($time);
-    echo $time->format("Y-m-d H:i:s\n");
-
-    // Outputs
-
-    2015-01-02 00:00:00
-
-## Monthly last day of week shifters
-
-### Available shifters
-
-* `COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekDecrement::__construct($weekDay:int)`
-* `COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekIncrement::__construct($weekDay:int)`
-
-### Example
-
-    use COG\ChronoShifter\ChronoShifter;
-    use COG\ChronoShifter\Shifter\MonthlyLastDayOfWeekIncrement;
-
-    $time = new \DateTime('2015-04-05 10:26:20');
-    $shifter = new MonthlyLastDayOfWeekIncrement(MonthlyFirstDayOfWeekDecrement::MONDAY);
-    $iterator = new \LimitIterator(new ChronoShifter($shifter, $time), 1, 10);
-    foreach($iterator as $time) {
-        echo $time->format("Y-m-d H:i:s\n");
-    }
-
-    // Outputs
-
-    2015-04-27 00:00:00
-    2015-05-25 00:00:00
-    2015-06-29 00:00:00
-    2015-07-27 00:00:00
-    2015-08-24 00:00:00
-    2015-09-28 00:00:00
-    2015-10-26 00:00:00
-    2015-11-23 00:00:00
-    2015-12-28 00:00:00
-    2016-01-25 00:00:00
-
-## Isochronic shifters
-
-Iterations such of biweekly (14) and four-weekly (28).
-
-### Available shifters
-
-* `COG\ChronoShifter\Shifter\IsochronicDecrement::__construct($days:int, \DateTime $reference)`
-* `COG\ChronoShifter\Shifter\IsochronicIncrement::__construct($days:int, \DateTime $reference)`
-
-### Example
-
-    use COG\ChronoShifter\ChronoShifter;
-    use COG\ChronoShifter\Shifter\IsochronicDecrement;
-
-    $time = new \DateTime('2015-04-05 10:26:20');
-    $shifter = new IsochronicDecrement(28, new \DateTime('2015-04-01'));
-    $iterator = new \LimitIterator(new ChronoShifter($shifter, $time), 1, 10);
-    foreach($iterator as $time) {
-        echo $time->format("Y-m-d H:i:s\n");
-    }
-
-    // Outputs
-
-    2015-04-01 00:00:00
-    2015-03-04 00:00:00
-    2015-02-04 00:00:00
-    2015-01-07 00:00:00
-    2014-12-10 00:00:00
-    2014-11-12 00:00:00
-    2014-10-15 00:00:00
-    2014-09-17 00:00:00
-    2014-08-20 00:00:00
-    2014-07-23 00:00:00
+* [Day of Month, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/DayOfMonthIncrement.html)
+* [Day of Month, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/DayOfMonthDecrement.html)
+* [Isochronic (7d), Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/IsochronicIncrement-1.html)
+* [Isochronic (7d), Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/IsochronicDecrement-1.html)
+* [Isochronic (14d), Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/IsochronicIncrement-2.html)
+* [Isochronic (14d), Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/IsochronicDecrement-2.html)
+* [Monthly First Day of Week, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/MonthlyFirstDayOfWeekIncrement.html)
+* [Monthly First Day of Week, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/MonthlyFirstDayOfWeekDecrement.html)
+* [Monthly Last Day of Week, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/MonthlyLastDayOfWeekIncrement.html)
+* [Monthly Last Day of Week, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/MonthlyLastDayOfWeekDecrement.html)
+* [Monthly First Workday, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/MonthlyFirstWorkdayIncrement.html)
+* [Monthly First Workday, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/MonthlyFirstWorkdayDecrement.html)
+* [Monthly Last Workday, Increment](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/MonthlyLastWorkdayIncrement.html)
+* [Monthly Last Workday, Decrement](https://htmlpreview.github.io/?https://github.com/cashongo/chronoShifter/blob/master/examples/MonthlyLastWorkdayDecrement.html)

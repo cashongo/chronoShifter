@@ -2,7 +2,11 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekIncrement;
+use COG\ChronoShifter\Direction\Increasing;
+use COG\ChronoShifter\Evaluator\DayOfWeek;
+use COG\ChronoShifter\Period\Month;
+use COG\ChronoShifter\Selector\FirstOf;
+use COG\ChronoShifter\Shifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
@@ -17,34 +21,34 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
 
         array(
             1, // Monday
-            '2015-06-02 00:00:00', // Starting time
-            '2015-07-06 00:00:00'  // Expected time
+            '2015-06-02', // Starting time
+            '2015-07-06'  // Expected time
         ),
 
         array(
             1, // Monday
             '2015-06-02 15:12:24', // Starting time
-            '2015-07-06 00:00:00'  // Expected time
+            '2015-07-06'  // Expected time
         ),
 
         array(
             7, // Sunday
             '2015-06-02 15:12:24', // Starting time
-            '2015-06-07 00:00:00'  // Expected time
+            '2015-06-07'  // Expected time
         ),
 
         array(
             5, // Friday
-            '2015-06-15 00:00:00', // Starting time
-            '2015-07-03 00:00:00'  // Expected time
+            '2015-06-15', // Starting time
+            '2015-07-03'  // Expected time
         ),
 
         // Day of week is also the first day of month
 
         array(
             7, // Sunday
-            '2015-01-15 00:00:00', // Starting time
-            '2015-02-01 00:00:00'
+            '2015-01-15', // Starting time
+            '2015-02-01'
         )
     );
 
@@ -56,13 +60,12 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
      */
     public function testShift($day, $start, $expected)
     {
-        $shifter = new MonthlyFirstDayOfWeekIncrement($day);
-        $date = new \DateTime($start);
-        $shifter->shift($date);
+        $shifter = new ChronoShifter(new Month($start), new FirstOf(new Increasing(), new DayOfWeek($day)));
+        $result = $shifter->shift($start);
 
         $this->assertEquals(
             $expected,
-            $date->format('Y-m-d H:i:s'),
+            $result,
             sprintf(
                 'From %s to next first week day of month = %d',
                 $start,
@@ -77,38 +80,5 @@ class MonthlyFirstDayOfWeekIncrementTest extends \PHPUnit_Framework_TestCase
     public function shiftProvider()
     {
         return $this->fixture;
-    }
-
-    public function testCastNumericStringToInteger()
-    {
-        $shifter = new MonthlyFirstDayOfWeekIncrement('1');
-        $this->assertInstanceOf(
-            'COG\ChronoShifter\Shifter\MonthlyFirstDayOfWeekIncrement',
-            $shifter
-        );
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testInvalidArgumentWillThrowException()
-    {
-        new MonthlyFirstDayOfWeekIncrement('1.5');
-    }
-
-    /**
-     * @expectedException \OutOfBoundsException
-     */
-    public function testBelowOneDayWillThrowException()
-    {
-        new MonthlyFirstDayOfWeekIncrement(0);
-    }
-
-    /**
-     * @expectedException \OutOfBoundsException
-     */
-    public function testAboveThirtyOneDaysWillThrowException()
-    {
-        new MonthlyFirstDayOfWeekIncrement(8);
     }
 }
