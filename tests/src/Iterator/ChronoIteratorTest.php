@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\COG\ChronoShifter\ChronoIterator;
+namespace Tests\COG\Iterator\ChronoIterator;
 
-use COG\ChronoShifter\ChronoShifter;
+use COG\ChronoShifter\Shifter\ChronoShifter;
 use COG\ChronoShifter\Direction\Increasing;
 use COG\ChronoShifter\Period\IsoChronic;
 use COG\ChronoShifter\Selector\Specific;
-use COG\ChronoShifter\ChronoIterator;
+use COG\ChronoShifter\Iterator\ChronoIterator;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>

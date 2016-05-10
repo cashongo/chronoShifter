@@ -68,7 +68,7 @@ use COG\ChronoShifter\Evaluator\Workday;
 use COG\ChronoShifter\HolidayProvider\ArrayHolidayProvider;
 use COG\ChronoShifter\Selector\FirstOf;
 use COG\ChronoShifter\Direction\Decreasing;
-use COG\ChronoShifter\ChronoShifter;
+use COG\ChronoShifter\Shifter\ChronoShifter;
 
 new ChronoShifter(new Month('2015-01-01'), new FirstOf(new Decreasing(), new Workday(new ArrayHolidayProvider($holidays))));
 </pre>

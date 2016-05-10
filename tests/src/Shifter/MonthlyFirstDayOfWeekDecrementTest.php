@@ -6,7 +6,7 @@ use COG\ChronoShifter\Direction\Decreasing;
 use COG\ChronoShifter\Evaluator\DayOfWeek;
 use COG\ChronoShifter\Period\Month;
 use COG\ChronoShifter\Selector\FirstOf;
-use COG\ChronoShifter\ChronoShifter;
+use COG\ChronoShifter\Shifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>

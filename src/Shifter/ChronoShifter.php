@@ -1,6 +1,6 @@
 <?php
 
-namespace COG\ChronoShifter;
+namespace COG\ChronoShifter\Shifter;
 
 use COG\ChronoShifter\Period\Period;
 use COG\ChronoShifter\Selector\Selector;

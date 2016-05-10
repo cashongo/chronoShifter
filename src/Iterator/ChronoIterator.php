@@ -1,6 +1,8 @@
 <?php
 
-namespace COG\ChronoShifter;
+namespace COG\ChronoShifter\Iterator;
+
+use COG\ChronoShifter\Shifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>

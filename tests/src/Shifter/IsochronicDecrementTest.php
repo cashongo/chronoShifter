@@ -5,7 +5,7 @@ namespace Tests\COG\ChronoShifter\Shifter;
 use COG\ChronoShifter\Direction\Decreasing;
 use COG\ChronoShifter\Period\IsoChronic;
 use COG\ChronoShifter\Selector\Specific;
-use COG\ChronoShifter\ChronoShifter;
+use COG\ChronoShifter\Shifter\ChronoShifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
