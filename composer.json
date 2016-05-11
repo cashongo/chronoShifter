@@ -1,7 +1,8 @@
 {
     "name": "cog/chrono-shifter",
     "description": "PHP iterators for moving around in time",
-    "keywords": ["time"],
+    "keywords": ["date", "framework", "iterator", "period", "recurrence", "recurring", "time"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Kristjan Siimson",
