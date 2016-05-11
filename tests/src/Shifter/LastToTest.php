@@ -2,7 +2,7 @@
 
 namespace Tests\COG\ChronoShifter\Shifter;
 
-use COG\ChronoShifter\Shifter\FirstMatchBefore;
+use COG\ChronoShifter\Shifter\LastTo;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
@@ -12,15 +12,10 @@ class FirstMatchBeforeTest extends \PHPUnit_Framework_TestCase
 {
     public function testIfMatchKeepDate()
     {
-        $shifter = $this->mockShifter();
-        $shifter->expects($this->any())->method('shift')->will($this->returnValue('2015-02-01'));
-
         $evaluator = $this->mockEvaluator();
         $evaluator->expects($this->any())->method('is')->will($this->returnValue(true));
-
-        $firstMatchBeforeShifter = new FirstMatchBefore($shifter, $evaluator);
-
-        $this->assertEquals('2015-02-01', $firstMatchBeforeShifter->shift('2011-01-01'));
+        $firstMatchBeforeShifter = new LastTo($evaluator);
+        $this->assertEquals('2015-02-01', $firstMatchBeforeShifter->shift('2015-02-01'));
     }
 
     /**
@@ -47,14 +42,9 @@ class FirstMatchBeforeTest extends \PHPUnit_Framework_TestCase
 
     public function testIfNotMatchIncrementDate()
     {
-        $shifter = $this->mockShifter();
-        $shifter->expects($this->any())->method('shift')->will($this->returnValue('2015-02-01'));
-
         $evaluator = $this->mockEvaluator();
         $evaluator->expects($this->any())->method('is')->will($this->onConsecutiveCalls(false, false, true));
-
-        $firstMatchBeforeShifter = new FirstMatchBefore($shifter, $evaluator);
-
-        $this->assertEquals('2015-01-30', $firstMatchBeforeShifter->shift('2011-01-01'));
+        $firstMatchBeforeShifter = new LastTo($evaluator);
+        $this->assertEquals('2015-01-30', $firstMatchBeforeShifter->shift('2015-02-01'));
     }
 }
