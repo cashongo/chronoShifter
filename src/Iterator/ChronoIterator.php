@@ -2,16 +2,16 @@
 
 namespace COG\ChronoShifter\Iterator;
 
-use COG\ChronoShifter\Shifter\ChronoShifter;
+use COG\ChronoShifter\Shifter\Shifter;
 
 /**
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
- * @package Domain
+ * @package Iterator\Domain
  */
 class ChronoIterator implements \Iterator
 {
     /**
-     * @var ChronoShifter
+     * @var Shifter
      */
     private $shifter;
 
@@ -26,10 +26,10 @@ class ChronoIterator implements \Iterator
     private $startDate;
 
     /**
-     * @param ChronoShifter $shifter
+     * @param Shifter $shifter
      * @param string $date
      */
-    public function __construct(ChronoShifter $shifter, $date = null)
+    public function __construct(Shifter $shifter, $date)
     {
         $this->shifter = $shifter;
         $this->date = $this->startDate = $date;

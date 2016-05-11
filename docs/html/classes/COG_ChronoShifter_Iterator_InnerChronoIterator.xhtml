@@ -2,7 +2,7 @@
 <!DOCTYPE html SYSTEM "about:legacy-compat">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <title>phpDox - COG\ChronoShifter\Iterator\ChronoIterator</title>
+    <title>phpDox - COG\ChronoShifter\Iterator\InnerChronoIterator</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
   </head>
@@ -41,7 +41,7 @@
           <li class="separator">
             <a href="../classes.xhtml#COG_ChronoShifter_Iterator">COG\ChronoShifter\Iterator</a>
           </li>
-          <li class="separator">ChronoIterator</li>
+          <li class="separator">InnerChronoIterator</li>
         </ul>
       </div>
       <nav class="box">
@@ -62,39 +62,38 @@
             <a href="#methods">Methods</a>
           </li>
           <li>
-            <a href="../source/Iterator/ChronoIterator.php.xhtml#line11">Source</a>
+            <a href="../source/Iterator/InnerChronoIterator.php.xhtml#line11">Source</a>
           </li>
         </ul>
       </nav>
       <section>
-        <h1 id="introduction"><small>COG\ChronoShifter\Iterator\</small>ChronoIterator</h1>
+        <h1 id="introduction"><small>COG\ChronoShifter\Iterator\</small>InnerChronoIterator</h1>
         <h4/>
         <p/>
         <ul>
           <li>Author: Kristjan Siimson &lt;kristjan.siimson@cashongo.co.uk&gt;</li>
         </ul>
         <h2 id="synopsis">Synopsis</h2>
-        <div class="synopsis">class ChronoIterator
-                implements
-                <a title="Iterator" href="../interfaces/Iterator.xhtml">Iterator</a>
-            {<br/><ul class="none"><li>// members</li><li>private <span title="COG\ChronoShifter\Shifter\Shifter">Shifter</span> <a href="#members">$shifter</a>;
-                    </li><li>private  <a href="#members">$date</a>;
-                    </li><li>private <span title="\DateTime">DateTime</span> <a href="#members">$startDate</a>;
-                    </li></ul><ul class="none"><li>// methods</li><li>public void <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/__construct.xhtml">__construct</a>()
-                    </li><li>public DateTime <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/current.xhtml">current</a>()
-                    </li><li>public void <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/next.xhtml">next</a>()
-                    </li><li>public int <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/key.xhtml">key</a>()
-                    </li><li>public boolean <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/valid.xhtml">valid</a>()
-                    </li><li>public void <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/rewind.xhtml">rewind</a>()
-                    </li></ul>
+        <div class="synopsis">class InnerChronoIterator
+                extends <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator.xhtml">ChronoIterator</a>
+            {<br/><ul class="none"><li>// members</li><li>private <span title="COG\ChronoShifter\Shifter\Shifter">Shifter</span> <a href="#members">$outerShifter</a>;
+                    </li></ul><ul class="none"><li>// methods</li><li>public void <a title="COG\ChronoShifter\Iterator\InnerChronoIterator" href="../classes/COG_ChronoShifter_Iterator_InnerChronoIterator/__construct.xhtml">__construct</a>()
+                    </li><li>public string <a title="COG\ChronoShifter\Iterator\InnerChronoIterator" href="../classes/COG_ChronoShifter_Iterator_InnerChronoIterator/current.xhtml">current</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="COG\ChronoShifter\Iterator\ChronoIterator">ChronoIterator</span></li><li>public void <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/__construct.xhtml">__construct</a>()
+                        </li><li>public DateTime <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/current.xhtml">current</a>()
+                        </li><li>public void <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/next.xhtml">next</a>()
+                        </li><li>public int <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/key.xhtml">key</a>()
+                        </li><li>public boolean <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/valid.xhtml">valid</a>()
+                        </li><li>public void <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/rewind.xhtml">rewind</a>()
+                        </li></ul>
 
             }<br/></div>
         <h2 id="hierarchy">Hierarchy</h2>
         <div class="styled">
-          <h4>Implements</h4>
+          <h4>Extends</h4>
           <ul>
             <li>
-              <a title="Iterator" href="../interfaces/Iterator.xhtml">Iterator</a>
+              <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator.xhtml">COG\ChronoShifter\Iterator\ChronoIterator</a>
             </li>
           </ul>
         </div>
@@ -102,15 +101,9 @@
         <div class="styled members">
           <h4>private</h4>
           <ul class="members">
-            <li id="date"><strong>$date</strong>
-                —
-                string</li>
-            <li id="shifter"><strong>$shifter</strong>
+            <li id="outerShifter"><strong>$outerShifter</strong>
                 —
                 <a title="COG\ChronoShifter\Shifter\Shifter" href="../classes/COG_ChronoShifter_Shifter_Shifter.xhtml">COG\ChronoShifter\Shifter\Shifter</a></li>
-            <li id="startDate"><strong>$startDate</strong>
-                —
-                <a title="\DateTime" href="../classes/_DateTime.xhtml">\DateTime</a></li>
           </ul>
         </div>
         <h2 id="methods">Methods</h2>
@@ -118,8 +111,15 @@
           <h4>public</h4>
           <ul>
             <li id="__construct">
-              <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/__construct.xhtml">__construct()</a>
+              <a title="COG\ChronoShifter\Iterator\InnerChronoIterator" href="../classes/COG_ChronoShifter_Iterator_InnerChronoIterator/__construct.xhtml">__construct()</a>
             </li>
+            <li id="current">
+              <a title="COG\ChronoShifter\Iterator\InnerChronoIterator" href="../classes/COG_ChronoShifter_Iterator_InnerChronoIterator/current.xhtml">current()</a>
+            </li>
+          </ul>
+          <h3>Inherited from <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator.xhtml">COG\ChronoShifter\Iterator\ChronoIterator</a></h3>
+          <h4>public</h4>
+          <ul>
             <li id="current">
               <a title="COG\ChronoShifter\Iterator\ChronoIterator" href="../classes/COG_ChronoShifter_Iterator_ChronoIterator/current.xhtml">current()</a>
             </li>
