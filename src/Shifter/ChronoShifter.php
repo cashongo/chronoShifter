@@ -9,7 +9,7 @@ use COG\ChronoShifter\Selector\Selector;
  * @author Kristjan Siimson <kristjan.siimson@cashongo.co.uk>
  * @package Shifter\Domain
  */
-class ChronoShifter
+class ChronoShifter implements Shifter
 {
     /**
      * @var Period
